@@ -87,7 +87,7 @@ loader.load('box.png', function (texture) {
     var mesh = new THREE.Mesh(geometry, material);
     box.add(mesh);
 });
-boxGeoObject.add(box);
+boxGeoObject.add(tramScene);
 var boxGeoEntity = new Argon.Cesium.Entity({
     name: "I have a box",
     position: Cartesian3.ZERO,
