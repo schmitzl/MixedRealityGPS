@@ -78,8 +78,11 @@ tramObj.translateZ(-10);
 tramObj.translateY(-10);
 tramObj.scale.set(10.0, 10.0, 10.0);
 
-var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
-var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
+//var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
+//var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
+
+var position1 = new Cesium.Cartographic(CesiumMath.toRadians(21), CesiumMath.toRadians(78), 5000);
+var cartesianPosition1 = Cesium.Ellipsoid.WGS84.cartographicToCartesian(position1);
 
 var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
@@ -93,7 +96,7 @@ loader.load('box.png', function (texture) {
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     name: "I have a box",
-    position: cartesianBox,
+    position: cartesianPosition1,
     orientation: Cesium.Quaternion.IDENTITY
 });
 
