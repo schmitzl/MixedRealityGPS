@@ -98,7 +98,7 @@ loader.load('box.png', function (texture) {
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     name: "I have a box",
-    position: new ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
+    position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
 
