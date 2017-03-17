@@ -78,7 +78,7 @@ tramObj.translateZ(-10);
 tramObj.translateY(-10);
 tramObj.scale.set(10.0, 10.0, 10.0);
 
-var llaBox = [18.071689, 59.351256, 29.25];
+var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
 
 var boxGeoObject = new THREE.Object3D();
