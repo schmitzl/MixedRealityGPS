@@ -81,8 +81,10 @@ tramObj.scale.set(10.0, 10.0, 10.0);
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
 
-var position1 = new Cesium.Cartographic(CesiumMath.toRadians(21), CesiumMath.toRadians(78), 5000);
-var cartesianPosition1 = Cesium.Ellipsoid.WGS84.cartographicToCartesian(position1);
+var cesiumPosition = Cartesian3.fromDegrees(18.071689, 59.351256, 29.25);            
+   
+
+
 
 var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
@@ -96,7 +98,7 @@ loader.load('box.png', function (texture) {
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     name: "I have a box",
-    position: cartesianPosition1,
+    position: new ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
 
@@ -132,12 +134,12 @@ app.updateEvent.addEventListener(function (frame) {
         var defaultFrame = app.context.getDefaultReferenceFrame();
         // set the box's position to 10 meters away from the user.
         // First, clone the userPose postion, and add 10 to the X
-	
-       // var boxPos_1 = userPose.position.clone();
-     //   boxPos_1.x += 10;
+
+        var boxPos_1 = argonApp.context.getEntityPose(cesiumEntity);
+        boxPos_1.x += 10;
         // set the value of the box Entity to this local position, by
         // specifying the frame of reference to our local frame
-       // boxGeoEntity.position.setValue(boxPos_1, defaultFrame);
+        boxGeoEntity.position.setValue(boxPos_1, defaultFrame);
         // orient the box according to the local world frame
         boxGeoEntity.orientation.setValue(Cesium.Quaternion.IDENTITY);
         // now, we want to move the box's coordinates to the FIXED frame, so
