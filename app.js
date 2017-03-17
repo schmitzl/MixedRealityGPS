@@ -98,7 +98,7 @@ loader.load('box.png', function (texture) {
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     name: "I have a box",
-    position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
+    position: new ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
 
@@ -134,8 +134,8 @@ app.updateEvent.addEventListener(function (frame) {
         var defaultFrame = app.context.getDefaultReferenceFrame();
         // set the box's position to 10 meters away from the user.
         // First, clone the userPose postion, and add 10 to the X
-
-        var boxPos_1 = argonApp.context.getEntityPose(cesiumEntity);
+//	var entityPos = app.context.getEntityPose(boxGeoEntity);
+        var boxPos_1 = app.context.getEntityPose(boxGeoEntity);
         boxPos_1.x += 10;
         // set the value of the box Entity to this local position, by
         // specifying the frame of reference to our local frame
