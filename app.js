@@ -17,6 +17,16 @@ var userLocation = new THREE.Object3D;
 scene.add(camera);
 scene.add(userLocation);
 
+// add light to the scene
+scene.add(new THREE.AmbientLight(0x443333));
+var light = new THREE.DirectionalLight(0xffddcc, 1);
+light.position.set(1, 0.75, 0.5);
+scene.add(light);
+var light = new THREE.DirectionalLight(0xccccff, 1);
+light.position.set(-1, 0.75, -0.5);
+scene.add(light);
+
+
 var cssRenderer = new THREE.CSS3DArgonRenderer();
 var hud = new THREE.CSS3DArgonHUD();
 var renderer = new THREE.WebGLRenderer({
@@ -35,6 +45,38 @@ var locationElements = hudContent.getElementsByClassName('location');
 
 var hudDescription = document.getElementById('description');
 hudContent.appendChild(hudDescription);
+
+
+// -- LOAD SCENES --
+var tramScene = new THREE.Object3D();
+var tramBase = new THREE.Object3D();
+var tramFrame = new THREE.Object3D();
+var platform = new THREE.Object3D();
+var invisibilityContainer = new THREE.Object3D();
+var portal = new THREE.Object3D();
+var canvas = new THREE.Object3D();
+var sky = new THREE.Object3D();
+var ground = new THREE.Object3D();
+var stadshuset = new THREE.Object3D();
+loadTramScene();
+tramScene.rotation.y = Math.PI;
+tramScene.translateX(-1);
+
+var graffitiTramScene = new THREE.Object3D();
+var graffitiTramBg = new THREE.Object3D();
+var graffitiTram = new THREE.Object3D();
+var graffitiMaskingPlane = new THREE.Object3D();
+loadgraffitiScene();
+graffitiTramScene.scale.set(0.25, 0.35, 0.25);
+
+var tramObj = new THREE.Object3D();
+var tramObjBase = new THREE.Object3D();
+var tramObjFrame = new THREE.Object3D();
+loadTramObj();
+tramObj.translateX(-5);
+tramObj.translateZ(-10);
+tramObj.translateY(-10);
+tramObj.scale.set(10.0, 10.0, 10.0);
 
 var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
@@ -186,3 +228,212 @@ app.renderEvent.addEventListener(function () {
         hud.render(subview.index);
     }
 });
+
+function loadTramScene() {
+    var tramMesh;
+    var tramTextureLoader = new THREE.TextureLoader();
+    var tramGeometry = new THREE.Geometry();
+    var tramLoader = new THREE.JSONLoader();
+    tramLoader.load('resources/obj/tram/tram.js', function (tramGeometry) {
+        var tramMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: tramTextureLoader.load('resources/obj/tram/b_tramBase_Albedo.png')
+        });
+        tramMesh = new THREE.Mesh(tramGeometry, tramMaterial);
+        tramBase.add(tramMesh);
+        tramMesh.renderOrder = 2;
+        tramMesh.scale.set(.4, .4, .4);
+    });
+        
+    var portalMesh;
+    var portalTextureLoader = new THREE.TextureLoader();
+    var portalGeometry = new THREE.Geometry();
+    var portalLoader = new THREE.JSONLoader();
+    portalLoader.load('resources/obj/tram/stoneportal.js', function (portalGeometry) {
+        var portalMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: portalTextureLoader.load('resources/obj/tram/bricks.jpg')
+        });
+        portalMesh = new THREE.Mesh(portalGeometry, portalMaterial);
+        portalMesh.renderOrder = 0;
+        portal.add(portalMesh);
+        portalMesh.scale.set(.4, .4, .4);
+    });
+    
+    
+    var frameMesh;
+    var frameTextureLoader = new THREE.TextureLoader();
+    var frameGeometry = new THREE.Geometry();
+    var frameLoader = new THREE.JSONLoader();
+    frameLoader.load('resources/obj/tram/frame.js', function (frameGeometry) {
+        var frameMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
+        frameMesh = new THREE.Mesh(frameGeometry, frameMaterial);
+        frameMesh.renderOrder = 2;
+        tramFrame.add(frameMesh);
+        frameMesh.scale.set(.4, .4, .4);
+    });
+    
+    var platformMesh;
+    var platformTextureLoader = new THREE.TextureLoader();
+    var platformGeometry = new THREE.Geometry();
+    var platformLoader = new THREE.JSONLoader();
+    platformLoader.load('resources/obj/tram/platform.js', function (platformGeometry) {
+        var platformMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: platformTextureLoader.load('resources/obj/tram/platformTexture.png')
+        });
+        platformMesh = new THREE.Mesh(platformGeometry, platformMaterial);
+        platformMesh.renderOrder = 2;
+        platform.add(platformMesh);
+        platformMesh.scale.set(.4, .4, .4);
+    });
+
+    var invisibilityContainerMesh;
+    var invisibilityContainerTextureLoader = new THREE.TextureLoader();
+    var invisibilityContainerGeometry = new THREE.Geometry();
+    var invisibilityContainerLoader = new THREE.JSONLoader();
+    invisibilityContainerLoader.load('resources/obj/tram/invisibilityContainer.js', function(invisibilityContainerGeometry){
+        var invisibilityContainerMaterial = new THREE.MeshPhongMaterial();
+        invisibilityContainerMesh = new THREE.Mesh(invisibilityContainerGeometry, invisibilityContainerMaterial);
+        invisibilityContainerMesh.material.color.set(0x001100);
+        invisibilityContainerMesh.material.colorWrite = false;
+        invisibilityContainerMesh.renderOrder = 1;
+        invisibilityContainer.add(invisibilityContainerMesh);
+        invisibilityContainerMesh.scale.set(.4, .4, .4);
+    });
+    
+    var skyMesh;
+    var skyTextureLoader = new THREE.TextureLoader();
+    var skyGeometry = new THREE.Geometry();
+    var skyLoader = new THREE.JSONLoader();
+    skyLoader.load('resources/obj/tram/SkyBox.js', function (skyGeometry) {
+        var skyMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: skyTextureLoader.load('resources/obj/tram/BlueSky.jpg')
+        });
+        skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
+        skyMesh.material.side = THREE.BackSide;
+        skyMesh.renderOrder = 2;
+        sky.add(skyMesh);
+        skyMesh.scale.set(.4, .4, .4);
+    });
+    
+    var groundMesh;
+    var groundTextureLoader = new THREE.TextureLoader();
+    var groundGeometry = new THREE.Geometry();
+    var groundLoader = new THREE.JSONLoader();
+    groundLoader.load('resources/obj/tram/ground.js', function (groundGeometry) {
+        var groundMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: groundTextureLoader.load('resources/obj/tram/Ground_basecolor.png')
+        });
+        groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+        groundMesh.renderOrder = 2;
+        ground.add(groundMesh);
+        groundMesh.scale.set(.4, .4, .4);
+    });
+    
+    var stadshusetMesh;
+    var stadshusetTextureLoader = new THREE.TextureLoader();
+    var stadshusetGeometry = new THREE.Geometry();
+    var stadshusetLoader = new THREE.JSONLoader();
+    stadshusetLoader.load('resources/obj/tram/stadshuset.js', function (stadshusetGeometry) {
+        var stadshusetMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: stadshusetTextureLoader.load('resources/obj/tram/stadshuset.png'),
+            transparent: true
+        });
+        stadshusetMesh = new THREE.Mesh(stadshusetGeometry, stadshusetMaterial);
+        stadshusetMesh.renderOrder = 2;
+        stadshuset.add(stadshusetMesh);
+        stadshusetMesh.scale.set(.4, .4, .4);
+    });
+    
+    tramScene.add(tramBase);
+    tramScene.add(tramFrame);
+    tramScene.add(platform);
+    tramScene.add(invisibilityContainer);
+    tramScene.add(portal);
+    tramScene.add(sky);
+    tramScene.add(ground);
+    tramScene.add(stadshuset);
+}
+
+
+function loadgraffitiScene() {
+    
+    var graffitiBgMesh;
+    var graffitiBgTextureLoader = new THREE.TextureLoader();
+    var graffitiBgGeometry = new THREE.Geometry();
+    var graffitiBgLoader = new THREE.JSONLoader();
+    graffitiBgLoader.load('resources/obj/tram/banksyTramBg.js', function (graffitiBgGeometry) {
+        var graffitiBgMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: graffitiBgTextureLoader.load('resources/obj/tram/banksyTrainBackground.png')
+          
+        });
+        graffitiBgMesh = new THREE.Mesh(graffitiBgGeometry, graffitiBgMaterial);
+        graffitiBgMesh.renderOrder = 2;
+        graffitiTramBg.add(graffitiBgMesh);
+    });
+    
+    var graffitiTramMesh;
+    var graffitiTramTextureLoader = new THREE.TextureLoader();
+    var graffitiTramGeometry = new THREE.Geometry();
+    var graffitiTramLoader = new THREE.JSONLoader();
+    graffitiTramLoader.load('resources/obj/tram/banksyTram.js', function (graffitiTramGeometry) {
+        var graffitiTramMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: graffitiTramTextureLoader.load('resources/obj/tram/banksyTrain.png'),
+            transparent: true          
+        });
+        graffitiTramMesh = new THREE.Mesh(graffitiTramGeometry, graffitiTramMaterial);
+        graffitiTramMesh.renderOrder = 2;
+        graffitiTram.add(graffitiTramMesh);
+    });
+    
+    var maskingPlaneMesh;
+    var maskingPlaneTextureLoader = new THREE.TextureLoader();
+    var maskingPlaneGeometry = new THREE.Geometry();
+    var maskingPlaneLoader = new THREE.JSONLoader();
+    maskingPlaneLoader.load('resources/obj/tram/maskingPlane.js', function(maskingPlaneGeometry){
+        var maskingPlaneMaterial = new THREE.MeshPhongMaterial();
+        maskingPlaneMesh = new THREE.Mesh(maskingPlaneGeometry, maskingPlaneMaterial);
+        maskingPlaneMesh.material.color.set(0x001100);
+        maskingPlaneMesh.material.colorWrite = false;
+        maskingPlaneMesh.renderOrder = 1;
+        graffitiMaskingPlane.add(maskingPlaneMesh);
+    });
+
+  //  graffitiTramScene.add(graffitiTramBg);
+    graffitiTramScene.add(graffitiTram);
+    graffitiTramScene.add(graffitiMaskingPlane);
+}
+
+function loadTramObj() {
+    var tramObjMesh;
+    var tramObjTextureLoader = new THREE.TextureLoader();
+    var tramObjGeometry = new THREE.Geometry();
+    var tramObjLoader = new THREE.JSONLoader();
+    tramObjLoader.load('resources/obj/tram/tram.js', function (tramObjGeometry) {
+        var tramObjMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: tramObjTextureLoader.load('resources/obj/tram/b_tramBase_Albedo.png')
+        });
+        tramObjMesh = new THREE.Mesh(tramObjGeometry, tramObjMaterial);
+        tramObjBase.add(tramObjMesh);
+    });
+    
+    var tramFrameMesh;
+    var tramFrameTextureLoader = new THREE.TextureLoader();
+    var tramFrameGeometry = new THREE.Geometry();
+    var tramFrameLoader = new THREE.JSONLoader();
+    tramFrameLoader.load('resources/obj/tram/frame.js', function (tramFrameGeometry) {
+        var tramFrameMaterial = new THREE.MeshLambertMaterial({color: 0x000000});
+        tramFrameMesh = new THREE.Mesh(tramFrameGeometry, tramFrameMaterial);
+        tramObjFrame.add(tramFrameMesh);
+    });
+    
+    tramObj.add(tramObjFrame);
+    tramObj.add(tramObjBase);
+}
