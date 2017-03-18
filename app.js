@@ -187,10 +187,8 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'Geospatial Argon example:<br>';
-    infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
-    infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
-    infoText += 'box is ' + toFixed(distanceToBox, 2) + ' meters away';
+    var infoText = 'a wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
+    infoText += cesiumPosition[1] + ', ' + cesiumPosition[2];
     var boxLabelText = 'a wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
     boxLabelText += cesiumPosition[1] + ', ' + cesiumPosition[2];
     if (lastInfoText !== infoText) {
