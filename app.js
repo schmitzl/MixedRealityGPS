@@ -91,6 +91,7 @@ loader.load('box.png', function (texture) {
     var mesh = new THREE.Mesh(geometry, material);
     box.add(mesh);
 });
+scene.add(boxGeoObject);
 
 var cesiumPosition = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
 boxGeoObject.add(box);
@@ -188,7 +189,7 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'Geospatial Argon example:<br>';
+    var infoText = 'Nuna:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'box (' + boxPose.position.x + ', ' + boxPose.position.y;
