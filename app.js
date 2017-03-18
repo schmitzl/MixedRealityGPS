@@ -61,6 +61,12 @@ var stadshuset = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
+var tramSceneGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
+var tramSceneGeoEntity = new Argon.Cesium.Entity({
+    position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
+    orientation: Cesium.Quaternion.IDENTITY
+});
+scene.add(tramScene);
 
 var graffitiTramScene = new THREE.Object3D();
 var graffitiTramBg = new THREE.Object3D();
@@ -68,6 +74,12 @@ var graffitiTram = new THREE.Object3D();
 var graffitiMaskingPlane = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
+var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
+var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
+    position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
+    orientation: Cesium.Quaternion.IDENTITY
+});
+scene.add(graffitiTramScene);
 
 var tramObj = new THREE.Object3D();
 var tramObjBase = new THREE.Object3D();
@@ -77,6 +89,12 @@ tramObj.translateX(-5);
 tramObj.translateZ(-10);
 tramObj.translateY(-10);
 tramObj.scale.set(10.0, 10.0, 10.0);
+var tramObjGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
+var tramObjGeoEntity = new Argon.Cesium.Entity({
+    position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
+    orientation: Cesium.Quaternion.IDENTITY
+});
+scene.add(tramObj);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
@@ -91,7 +109,7 @@ loader.load('box.png', function (texture) {
     var mesh = new THREE.Mesh(geometry, material);
     box.add(mesh);
 });
-scene.add(boxGeoObject);
+//scene.add(boxGeoObject);
 
 var cesiumPosition = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
 boxGeoObject.add(box);
@@ -106,7 +124,7 @@ var boxLabel = new THREE.CSS3DSprite(boxLocDiv);
 boxLabel.scale.set(0.02, 0.02, 0.02);
 boxLabel.position.set(0, 1.25, 0);
 boxGeoObject.add(boxLabel);
-var boxInit = true;
+
 var boxCartographicDeg = [0, 0, 0];
 var lastInfoText = '';
 var lastBoxText = '';
@@ -127,27 +145,21 @@ app.updateEvent.addEventListener(function (frame) {
 
         return;
     }
-    // the first time through, we create a geospatial position for
-    // the box somewhere near us 
-    if (!boxInit) {
-        var defaultFrame = app.context.getDefaultReferenceFrame();
-        // set the box's position to 10 meters away from the user.
-        // First, clone the userPose postion, and add 10 to the X
-//	var entityPos = app.context.getEntityPose(boxGeoEntity);
-        var boxPos_1 = app.context.getEntityPose(boxGeoEntity);
-        boxPos_1.x += 10;
-        // set the value of the box Entity to this local position, by
-        // specifying the frame of reference to our local frame
-        boxGeoEntity.position.setValue(boxPos_1, ReferenceFrame.FIXED);
-        // orient the box according to the local world frame
-        boxGeoEntity.orientation.setValue(Cesium.Quaternion.IDENTITY);
-        // now, we want to move the box's coordinates to the FIXED frame, so
-        // the box doesn't move if the local coordinate system origin changes.
-        if (Argon.convertEntityReferenceFrame(boxGeoEntity, frame.time, ReferenceFrame.FIXED)) {
-            scene.add(boxGeoObject);
-            boxInit = true;
-        }
-    }
+    
+   var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+   tramScene.position.copy(tramScenePos.position);
+   tramScene.quaternion.copy(tramScenePos.orientation);
+
+   var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
+   graffitiTramScene.position.copy(graffitiScenePos.position);
+   graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
+
+   var tramObjPos = app.context.getEntityPose(tramObjGeoEntity);   
+   tramObj.position.copy(tramObjPos.position);
+   tramObj.quaternion.copy(tramObjPos.orientation);
+
+
+
     // get the local coordinates of the local box, and set the THREE object
     var boxPose = app.context.getEntityPose(boxGeoEntity);
     boxGeoObject.position.copy(boxPose.position);
@@ -414,7 +426,7 @@ function loadgraffitiScene() {
         graffitiMaskingPlane.add(maskingPlaneMesh);
     });
 
-  //  graffitiTramScene.add(graffitiTramBg);
+    graffitiTramScene.add(graffitiTramBg);
     graffitiTramScene.add(graffitiTram);
     graffitiTramScene.add(graffitiMaskingPlane);
 }
