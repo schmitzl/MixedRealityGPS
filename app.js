@@ -81,7 +81,7 @@ tramObj.scale.set(10.0, 10.0, 10.0);
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
 
-var cesiumPosition = Cesium.Cartesian3.fromDegrees(59.374350, 17.920936, 29.25);            
+var cesiumPosition = Cartesian3.fromDegrees(59, 17, 29);            
 
 var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
@@ -187,8 +187,8 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'Wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
-    infoText += cesiumPosition[1] + ', ' + cesiumPosition[2];
+    var infoText = 'Wooden box!<br>lla = ' + cesiumPosition.x + ', ';
+    infoText += cesiumPosition.y + ', ' + cesiumPosition.z;
     var boxLabelText = 'a wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
     boxLabelText += cesiumPosition[1] + ', ' + cesiumPosition[2];
     if (lastInfoText !== infoText) {
