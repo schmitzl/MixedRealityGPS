@@ -201,7 +201,7 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'Nuna:<br>';
+    var infoText = 'Herna:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'box (' + boxPose.position.x + ', ' + boxPose.position.y;
