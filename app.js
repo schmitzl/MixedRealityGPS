@@ -187,7 +187,7 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'Wooden box!<br>lla = ' + cesiumPosition.x + ', ';
+    var infoText = ' box!<br>lla = ' + cesiumPosition.x + ', ';
     infoText += cesiumPosition.y + ', ' + cesiumPosition.z;
     var boxLabelText = 'a wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
     boxLabelText += cesiumPosition[1] + ', ' + cesiumPosition[2];
