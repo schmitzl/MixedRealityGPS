@@ -80,8 +80,7 @@ tramObj.scale.set(10.0, 10.0, 10.0);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
-
-var cesiumPosition = Cartesian3.fromDegrees(59, 17, 29);            
+           
 
 var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
@@ -92,19 +91,21 @@ loader.load('box.png', function (texture) {
     var mesh = new THREE.Mesh(geometry, material);
     box.add(mesh);
 });
+
+var cesiumPosition = Cartesian3.fromDegrees(18.071689, 59.351256, 29.25); 
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
-    name: "I have a box",
     position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
+
 
 var boxLocDiv = document.getElementById("box-location");
 var boxLabel = new THREE.CSS3DSprite(boxLocDiv);
 boxLabel.scale.set(0.02, 0.02, 0.02);
 boxLabel.position.set(0, 1.25, 0);
 boxGeoObject.add(boxLabel);
-var boxInit = false;
+var boxInit = true;
 var boxCartographicDeg = [0, 0, 0];
 var lastInfoText = '';
 var lastBoxText = '';
@@ -136,7 +137,7 @@ app.updateEvent.addEventListener(function (frame) {
         boxPos_1.x += 10;
         // set the value of the box Entity to this local position, by
         // specifying the frame of reference to our local frame
-        boxGeoEntity.position.setValue(boxPos_1, defaultFrame);
+        boxGeoEntity.position.setValue(boxPos_1, ReferenceFrame.FIXED);
         // orient the box according to the local world frame
         boxGeoEntity.orientation.setValue(Cesium.Quaternion.IDENTITY);
         // now, we want to move the box's coordinates to the FIXED frame, so
@@ -187,10 +188,12 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = ' box!<br>lla = ' + cesiumPosition.x + ', ';
-    infoText += cesiumPosition.y + ', ' + cesiumPosition.z;
-    var boxLabelText = 'a wooden box!<br>lla = ' + cesiumPosition[0] + ', ';
-    boxLabelText += cesiumPosition[1] + ', ' + cesiumPosition[2];
+    var infoText = 'Geospatial Argon example:<br>';
+    infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
+    infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
+    infoText += 'box' + boxPose.position.x ', ' + boxPose.position.y + ', ' + boxPose.position.z +'  is ' + toFixed(distanceToBox, 2) + ' meters away';
+    var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
+    boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
     if (lastInfoText !== infoText) {
         locationElements[0].innerHTML = infoText;
         lastInfoText = infoText;
