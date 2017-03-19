@@ -68,6 +68,8 @@ button:active {
 
 #arrow {
 	width: 80px;
-position: block;
-margin: auto;
+	display: block;
+	margin-left: auto;
+    	margin-right: auto;
+
 }
