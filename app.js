@@ -115,7 +115,7 @@ loader.load('box.png', function (texture) {
 });
 scene.add(boxGeoObject);
 
-var cesiumPosition = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
+var cesiumPosition = Cartesian3.fromDegrees(18.071664, 59.351266, 28.09); 
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
