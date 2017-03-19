@@ -62,10 +62,12 @@ button:active {
 #arrowContainer {
 	position: absolute;
 	bottom: 0;
-	margin-left: auto;
-	margin-right: auto;
+	width: 100%;
+	background-color: red;
 }
 
 #arrow {
 	width: 80px;
+position: block;
+margin: auto;
 }
