@@ -46,6 +46,10 @@ var locationElements = hudContent.getElementsByClassName('location');
 var hudDescription = document.getElementById('description');
 hudContent.appendChild(hudDescription);
 
+var arrowContainer = document.getElementById('arrowContainer');
+var arrow = document.getElementById('arrow');
+arrowContainer.add(arrow);
+hudContent.add(arrowContainer);
 
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
