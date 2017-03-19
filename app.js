@@ -205,8 +205,8 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var dir_x = boxObject.position.x - userPose.x;
-    var dir_y = boxObject.position.y - userPose.y;
+    var dir_x = boxPose.position.x - userPose.x;
+    var dir_y = boxPose.position.y - userPose.y;
 
     var dir = new THREE.Vector2( dir_x, dir_y );
     var orientation = new THREE.Vector2( userPose.orientation.x, userPose.orientation.y );
