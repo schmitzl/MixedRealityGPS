@@ -206,15 +206,15 @@ app.updateEvent.addEventListener(function (frame) {
     var distanceToBox = userPos.distanceTo(boxPos);
 
     var dir_x = boxPose.position.x - userPose.x;
-    var dir_y = boxPose.position.y - userPose.y;
+    var dir_z = boxPose.position.z - userPose.z;
 
-    var dir = new THREE.Vector2( dir_x, dir_y );
-    var orientation = new THREE.Vector2( userPose.orientation.x, userPose.orientation.y );
-    var angle = Math.atan2(orientation.y - dir.y, orientation.x - dir.x);
+    var dir = new THREE.Vector2( dir_x, dir_z );
+    var orientation = new THREE.Vector2( userPose.orientation.x, userPose.orientation.z );
+    var angle = Math.atan2(orientation.z - dir.z, orientation.x - dir.x);
 
     
 
-    var infoText = 'angle:<br>';
+    var infoText = 'angle2:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'angle + ' + angle;
