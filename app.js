@@ -205,11 +205,19 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var infoText = 'hier:<br>';
+    var dir_x = boxObject.position.x - userPose.x;
+    var dir_y = boxObject.position.y - userPose.y;
+
+    var dir = new THREE.Vector2( dir_x, dir_y );
+    var orientation = new THREE.Vector2( userPose.orientation.x, userPose.orientation.y );
+    var angle = Math.atan2(orientation.y - dir.y, orientation.x - dir.x);
+
+    
+
+    var infoText = 'angle:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
-    infoText += 'box (' + boxPose.position.x + ', ' + boxPose.position.y;
-    infoText += ', ' + boxPose.position.z + ')  is ' + toFixed(distanceToBox, 2) + ' meters away';
+    infoText += 'angle + ' + angle;
     var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
     boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
     if (lastInfoText !== infoText) {
