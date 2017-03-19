@@ -61,7 +61,7 @@ var stadshuset = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97); 
+var tramSceneGeoPos = Cartesian3.fromDegrees(18., , ); 
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -79,7 +79,7 @@ var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-scene.add(graffitiTramScene);
+//scene.add(graffitiTramScene);
 
 var tramObj = new THREE.Object3D();
 var tramObjBase = new THREE.Object3D();
@@ -94,7 +94,7 @@ var tramObjGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-scene.add(tramObj);
+//scene.add(tramObj);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
