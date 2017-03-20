@@ -205,21 +205,20 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    var dir_x = boxPose.position.x - userPose.x;
-    var dir_z = boxPose.position.z - userPose.z;
+    camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
+    var mat = new THREE.Matrix4().multiply( camera.matrixWorldInverse, boxGeoObject.matrixWorld );
+    var pos = mat.multiplyVector3( boxGeoObject.position.clone() );
+    var camVec = new Vector3(0, 0, -1);
+    var objDirVec = pos.normalize();
 
-    var dir = new THREE.Vector2( dir_x, dir_z );
-    var orientation = new THREE.Vector2( userPose.orientation.x, userPose.orientation.z );
-    dir.normalize();
-    orientation.normalize();
-    var angle = Math.atan2(orientation.z - dir.z, orientation.x - dir.x);
+    var dot = camVec.x*objDirVec.x + camVec.y*objDirVec.y;
 
     
 
-    var infoText = 'angle4:<br>';
+    var infoText = 'dot:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
-    infoText += 'angle + ' + angle;
+    infoText += 'dot + ' + dot;
     var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
     boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
     if (lastInfoText !== infoText) {
