@@ -214,7 +214,7 @@ app.updateEvent.addEventListener(function (frame) {
     b.sub(a);
     var c = new THREE.Vector3(boxPose.position.x, boxPose.position.y, boxPose.position.z);
     c.sub(a);
-    b.cross(v);
+    b.cross(c);
 
 
 
