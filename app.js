@@ -11,6 +11,8 @@ var app = Argon.init();
 
 app.context.setDefaultReferenceFrame(app.context.localOriginEastUpSouth);
 
+var isLeft = false;
+
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera();
 var userLocation = new THREE.Object3D;
@@ -215,6 +217,15 @@ app.updateEvent.addEventListener(function (frame) {
     var c = new THREE.Vector3(boxPose.position.x, boxPose.position.y, boxPose.position.z);
     c.sub(a);
     b.cross(c);
+
+    if( b.z > 0) {
+        isLeft = true;
+        document.getElementById("arrow").src="resources/leftArrow.png";
+    }
+    else {
+        isLeft = false;
+        document.getElementById("arrow").src="resources/rightArrow.png";
+    }
 
 
 
