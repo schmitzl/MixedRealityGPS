@@ -12,6 +12,8 @@ var app = Argon.init();
 app.context.setDefaultReferenceFrame(app.context.localOriginEastUpSouth);
 
 var isLeft = false;
+var animationStep = 0;
+var graffitiStep = 520;
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera();
@@ -141,6 +143,37 @@ function toFixed(value, precision) {
 }
 
 app.updateEvent.addEventListener(function (frame) {
+
+    graffitiTram.translateY(0.003);
+    graffitiTram.translateX(0.005);
+    if (graffitiStep > 1080) {
+        graffitiStep = 0;
+        graffitiTram.position.x = 0;
+        graffitiTram.position.y = 0;
+        graffitiTram.translateY(-580 * 0.003);
+        graffitiTram.translateX(-580 * 0.005);
+    }
+    graffitiStep = graffitiStep + 1;
+    
+    if(animationStep > 700) {
+        tramBase.rotation.y = 199 * 0.00272665;
+        tramFrame.rotation.y = 199 * 0.00272665;
+        tramBase.position.z = 0;
+        tramFrame.position.z = 0;
+        tramBase.rotation.y = 0;
+        tramFrame.rotation.y = 0;
+        tramBase.position.x = 0;
+        tramFrame.position.x = 0;
+        animationStep = 0;
+    }
+    animationStep = animationStep + 1;
+    if(animationStep > 300  && animationStep < 500) {
+        tramBase.rotation.y = tramBase.rotation.y - 0.00272665;
+        tramFrame.rotation.y = tramFrame.rotation.y - 0.00272665;
+    }
+    
+    tramBase.translateZ(0.01);
+    tramFrame.translateZ(0.01);
   
     var userPose = app.context.getEntityPose(app.context.user);
    
