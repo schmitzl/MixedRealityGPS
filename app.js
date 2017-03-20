@@ -206,20 +206,31 @@ app.updateEvent.addEventListener(function (frame) {
     var boxPos = box.getWorldPosition();
     var distanceToBox = userPos.distanceTo(boxPos);
 
-    camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
+    var camDir = camera.getWorldDirection();
+    camera.updateMatrixWorld();
+    var a = camera.position.clone();
+    a.applyMatrix( camera.matrixWorld );
+    var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
+    b.sub(a);
+    c.sub(a);
+    b.cross(v);
+
+
+
+   /* camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
     var mat = new THREE.Matrix4().multiply( camera.matrixWorldInverse, boxGeoObject.matrixWorld );
     var pos = mat.multiplyVector3( boxGeoObject.position.clone() );
     var camVec = new THREE.Vector3(0, 0, -1);
     var objDirVec = pos.normalize();
 
-    var dot = camVec.x*objDirVec.x + camVec.z*objDirVec.z;
+    var dot = camVec.x*objDirVec.x + camVec.z*objDirVec.z;*/
 
     
 
-    var infoText = 'angle3:<br>';
+    var infoText = 'cross:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
-    infoText += 'dot + ' + dot;
+    infoText += 'dot + ' + b.z;
     var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
     boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
     if (lastInfoText !== infoText) {
