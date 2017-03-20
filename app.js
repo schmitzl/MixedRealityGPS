@@ -211,11 +211,11 @@ app.updateEvent.addEventListener(function (frame) {
     var camVec = new THREE.Vector3(0, 0, -1);
     var objDirVec = pos.normalize();
 
-    var dot = camVec.x*objDirVec.x + camVec.y*objDirVec.y;
+    var dot = camVec.x*objDirVec.x + camVec.z*objDirVec.z;
 
     
 
-    var infoText = 'angle:<br>';
+    var infoText = 'angle2:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'dot + ' + dot;
