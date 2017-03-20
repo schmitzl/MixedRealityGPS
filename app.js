@@ -208,14 +208,14 @@ app.updateEvent.addEventListener(function (frame) {
     camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
     var mat = new THREE.Matrix4().multiply( camera.matrixWorldInverse, boxGeoObject.matrixWorld );
     var pos = mat.multiplyVector3( boxGeoObject.position.clone() );
-    var camVec = new Vector3(0, 0, -1);
+    var camVec = new THREE.Vector3(0, 0, -1);
     var objDirVec = pos.normalize();
 
     var dot = camVec.x*objDirVec.x + camVec.y*objDirVec.y;
 
     
 
-    var infoText = 'dot:<br>';
+    var infoText = 'dot2:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'dot + ' + dot;
