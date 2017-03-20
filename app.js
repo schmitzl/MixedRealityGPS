@@ -189,6 +189,7 @@ app.updateEvent.addEventListener(function (frame) {
         ];
     }
     var boxPoseFIXED = app.context.getEntityPose(boxGeoEntity, ReferenceFrame.FIXED);
+    boxPoseFIXED.position.x += 10;
     var boxLLA = Cesium.Ellipsoid.WGS84.cartesianToCartographic(boxPoseFIXED.position);
     if (boxLLA) {
         boxCartographicDeg = [
@@ -215,7 +216,7 @@ app.updateEvent.addEventListener(function (frame) {
 
     
 
-    var infoText = 'angle2:<br>';
+    var infoText = 'angle3:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'dot + ' + dot;
