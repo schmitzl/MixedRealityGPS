@@ -209,7 +209,7 @@ app.updateEvent.addEventListener(function (frame) {
     var camDir = camera.getWorldDirection();
     camera.updateMatrixWorld();
     var a = camera.position.clone();
-    a.applyMatrix( camera.matrixWorld );
+    a.applyMatrix3( camera.matrixWorld );
     var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
     b.sub(a);
     c.sub(a);
@@ -227,7 +227,7 @@ app.updateEvent.addEventListener(function (frame) {
 
     
 
-    var infoText = 'cross:<br>';
+    var infoText = 'cross2:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'dot + ' + b.z;
