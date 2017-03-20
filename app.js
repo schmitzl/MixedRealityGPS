@@ -115,7 +115,7 @@ loader.load('box.png', function (texture) {
 });
 scene.add(boxGeoObject);
 
-var cesiumPosition = Cartesian3.fromDegrees(18.071664, 59.351266, 18.09); 
+var cesiumPosition = Cartesian3.fromDegrees(17.920748, 59.374261, 21.08); 
 boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
@@ -215,7 +215,7 @@ app.updateEvent.addEventListener(function (frame) {
 
     
 
-    var infoText = 'dot2:<br>';
+    var infoText = 'angle:<br>';
     infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
     infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
     infoText += 'dot + ' + dot;
