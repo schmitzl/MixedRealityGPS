@@ -399,7 +399,7 @@ app.updateEvent.addEventListener(function (frame) {
     a.applyMatrix3(camera.matrixWorld);
     var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
     b.sub(a);
-    var c = new THREE.Vector3(objPose.position.x, objPose.position.y, objPose.position.z);
+    var c = new THREE.Vector3(objPose.x, objPose.y, objPose.z);
     c.sub(a);
     b.cross(c);
 
