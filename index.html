@@ -15,7 +15,7 @@
 
 	 <div id="description">
         <img id="thumb" src="resources/imgs/graffiti_thumb.jpg"/>
-        <h2 id="heading">find the marker4</h2>
+        <h2 id="heading">find the marker</h2>
        <!-- <button id="doneBtn" onclick="btnClicked()">Done!</button> -->
       </div>
      <!--   <div id="slider">
@@ -26,7 +26,7 @@
         
          <div class="instructions" id="instructions-graffiti-find">
             <img class="instructions-pic" src="resources/imgs/findGraffitiObj.png"/>
-            <button class="gotItBtn">Got it!</button>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
         </div>
      <!--   <div class="instructions" id="instructions-timeportal-find">
             <img class="instructions-pic" src="resources/imgs/findTimeportalObj.png"/>
@@ -65,7 +65,7 @@
       </div>
       
   </body>
-   <!-- <script>
+   <script>
 		function hideParent(elem) {
             document.getElementById("heading").innerHTML = "click";
 		    //elem.parentElement.style.display = 'none';
