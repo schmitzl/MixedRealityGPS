@@ -204,6 +204,7 @@ app.updateEvent.addEventListener(function (frame) {
                         sendData(posData);
                         posData = "";
                     }
+                }
                     
                 } else if (step == portal_step) {
 
