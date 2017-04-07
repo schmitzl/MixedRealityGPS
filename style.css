@@ -6,32 +6,18 @@ a {
 	color: #ffffff;
 }
 
-.menu {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	text-align: center;
-    pointer-events: none;
-}
-
 button {
-	color: white;
-	background: rgba(27,55,55,0.75);;
-	outline: 1px solid rgba(127,255,255,0.75);
-	border: 0px;
-	margin-bottom: 20px;
-	padding: 5px 10px;
-	cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: middle;
 }
 
-button:hover {
-	background-color: rgba(0,255,255,0.5);
-}
-
-button:active {
-	color: #000000;
-	background-color: rgba(0,255,255,0.75);
-}
 
 #description {
   color: white;
@@ -46,21 +32,6 @@ button:active {
   z-index: 2;
 }
 
-.argon-focus #menu {
-  transition: opacity 0.8s;
-  visibility: visible;
-  opacity: 1; 
-}
-
-.argon-no-focus #menu {
-  transition: visibility 0s linear 0.8s, opacity 0.8s;
-  visibility: visible;
-  opacity: 0;
-}
-
-#hud {
-  pointer-events: auto;
-}
 
 #arrowContainer {
 	position: absolute;
@@ -104,18 +75,6 @@ button:active {
 input {
     margin: 15px;
     width: 90%;
-}
-    
-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 7px 15px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    vertical-align: middle;
 }
     
 #doneBtn {
