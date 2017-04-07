@@ -152,202 +152,202 @@ function toFixed(value, precision) {
 
 app.updateEvent.addEventListener(function (frame) {
 
-            var objPose;
-    
-            if (step == graffiti_step) {
+    var objPose;
 
-                var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
-                graffitiTramScene.position.copy(graffitiScenePos.position);
-                graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
-                
-                objPose = graffitiTramScene.getWorldPosition();
-                
-                if (isSearching) {
-                    if (isBtnClicked) {
-                        isBtnClicked = false;
-                        isSearching = false;
-                        scene.add(graffitiTramScene);
-                        document.getElementById("thumb").src = "resources/imgs/moveGraffitiThumb.png";
-                        isPlacing = true;
-                        document.getElementById("arrow").style.display = "none";
-                    }
-                } else if (isPlacing) {
-                    if (isBtnClicked) {
-                        isBtnClicked = false;
-                        isPlacing = false;
-                        document.getElementById("slider").style.display = "none";
-                        document.getElementById("graffiti-slider").style.display = "none";
-                        document.getElementById("heading").innerHTML = "Take a screenshot";
-                        document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
-                        isTakingScreenshot = true;
-                        scene.add(box1Obj);
-                        scene.add(box2Obj);
-                        box1Obj.position.copy(graffitiMarkerPose.position);
-                        box2Obj.position.copy(graffitiMarkerPose.position);
-                        box2Obj.position.z = box2Obj.position.z - 0.5;
-                        box2Obj.position.x = box2Obj.position.x + 1.5;
-                        box2Obj.position.y = box2Obj.position.y + 0.5;
-                        isRecordingPose = true;
-                    }
-                } else if (isTakingScreenshot) {
-                    if (isBtnClicked) {
-                        isBtnClicked = false;
-                        step++;
-                        document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
-                        document.getElementById("doneBtn").style.display = "none";
-                        document.getElementById("heading").innerHTML = "Find the marker";
-                        document.getElementById("instructions-timeportal-find").style.display = "inline";
-                        isTakingScreenshot = false;
-                        scene.remove(box1Obj);
-                        scene.remove(box2Obj);
-                        isRecordingPose = false;
-                        sendData(posData);
-                        posData = "";
-                    }
-                }
-                    
-                } else if (step == portal_step) {
+    if (step == graffiti_step) {
 
-                    var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
-                    tramScene.position.copy(tramScenePos.position);
-                    tramScene.quaternion.copy(tramScenePos.orientation);
-                    
-                    objPose = tramScene.getWorldPosition();
-                    
-                    if (isSearching) {
-                        if (isBtnClicked) {
-                            scene.remove(graffitiTramScene);
-                            isBtnClicked = false;
-                            isSearching = false;
-                            scene.add(tramScene);
-                            tramScene.position.z = 0;
-                            document.getElementById("thumb").src = "resources/imgs/moveThumb.jpg";
-                            isPlacing = true;
-                            document.getElementById("arrow").style.display = "none";
-                        }
-                    } else if (isPlacing) {
-                        if (isBtnClicked) {
-                            isBtnClicked = false;
-                            isPlacing = false;
-                            document.getElementById("slider").style.display = "none";
-                            document.getElementById("timeportal-slider").style.display = "none";
-                            document.getElementById("heading").innerHTML = "Take a screenshot";
-                            document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
-                            isTakingScreenshot = true;
-                            scene.add(box1Obj);
-                            scene.add(box2Obj);
-                            box1Obj.position.copy(tramMarkerPose.position);
-                            box2Obj.position.copy(tramMarkerPose.position);
-                            box2Obj.position.z = box2Obj.position.z - 0.5;
-                            box2Obj.position.x = box2Obj.position.x + 1.5;
-                            box2Obj.position.y = box2Obj.position.y + 0.5;
-                            isRecordingPose = true;
-                        }
-                    } else if (isTakingScreenshot) {
-                        if (isBtnClicked) {
-                            isRecordingPose = false;
-                            sendData(posData);
-                            posData = "";
-                            isBtnClicked = false;
-                            step++;
-                            document.getElementById("thumb").src = "resources/imgs/tram_thumb.jpg";
-                            document.getElementById("doneBtn").style.display = "none";
-                            document.getElementById("heading").innerHTML = "Find the marker";
-                            document.getElementById("instructions-schedule-find").style.display = "inline";
-                            isTakingScreenshot = false;
-                            scene.remove(box1Obj);
-                            scene.remove(box2Obj);
-                        }
-                    }
-                } else {
-                    
-                    var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
-                    schedule.position.copy(schedulePos.position);
-                    schedule.quaternion.copy(schedulePos.orientation);
-                    
-                    objPose = schedule.getWorldPosition();
+        var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
+        graffitiTramScene.position.copy(graffitiScenePos.position);
+        graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
 
-                    if(isSearching) {
-                        if(isBtnClicked) { 
-                            scene.remove(tramScene);
-                            isSearching = false;
-                            isBtnClicked = false;
-                            markerObject.add(schedule);
-                            document.getElementById("thumb").src = "resources/imgs/moveScheduleThumb.jpg";
-                            isPlacing = true;
-                            document.getElementById("arrow").style.display = "none";
-                        }
-                    } else if (isPlacing) {
-                        if (isBtnClicked) {
-                            isBtnClicked = false;
-                            isPlacing = false;
-                            document.getElementById("slider").style.display = "none";
-                            document.getElementById("heading").innerHTML = "Take a screenshot";
-                            document.getElementById("instructions-schedule-screenshot").style.display = "inline";
-                            isTakingScreenshot = true;
-                            scene.add(box1Obj);
-                            scene.add(box2Obj);
-                            box1Obj.position.copy(markerPose.position);
-                            box2Obj.position.copy(markerPose.position);
-                            box2Obj.position.z = box2Obj.position.z - 0.5;
-                            box2Obj.position.x = box2Obj.position.x + 1.5;
-                            box2Obj.position.y = box2Obj.position.y + 0.5;
-                            isRecordingPose = true;
-                        }
-                    } else if (isTakingScreenshot) {
-                        if (isBtnClicked) {
-                            isBtnClicked = false;
-                            step++;
-                            scene.remove(markerObject);
-                            document.getElementById("doneBtn").style.display = "none";
-                            document.getElementById("heading").innerHTML = "You are finished";
-                            isTakingScreenshot = false;
-                            scene.remove(box1Obj);
-                            scene.remove(box2Obj);
-                            isRecordingPose = false;
-                            sendData(posData);
-                            posData = "";
-                        }
-                    } else {
-                        document.getElementById("doneBtn").style.display = "none";
-                    }
-                }
+        objPose = graffitiTramScene.getWorldPosition();
 
-                var userPose = app.context.getEntityPose(app.context.user);
+        if (isSearching) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                isSearching = false;
+                scene.add(graffitiTramScene);
+                document.getElementById("thumb").src = "resources/imgs/moveGraffitiThumb.png";
+                isPlacing = true;
+                document.getElementById("arrow").style.display = "none";
+            }
+        } else if (isPlacing) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                isPlacing = false;
+                document.getElementById("slider").style.display = "none";
+                document.getElementById("graffiti-slider").style.display = "none";
+                document.getElementById("heading").innerHTML = "Take a screenshot";
+                document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
+                isTakingScreenshot = true;
+                scene.add(box1Obj);
+                scene.add(box2Obj);
+                box1Obj.position.copy(graffitiMarkerPose.position);
+                box2Obj.position.copy(graffitiMarkerPose.position);
+                box2Obj.position.z = box2Obj.position.z - 0.5;
+                box2Obj.position.x = box2Obj.position.x + 1.5;
+                box2Obj.position.y = box2Obj.position.y + 0.5;
+                isRecordingPose = true;
+            }
+        } else if (isTakingScreenshot) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                step++;
+                document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
+                document.getElementById("doneBtn").style.display = "none";
+                document.getElementById("heading").innerHTML = "Find the marker";
+                document.getElementById("instructions-timeportal-find").style.display = "inline";
+                isTakingScreenshot = false;
+                scene.remove(box1Obj);
+                scene.remove(box2Obj);
+                isRecordingPose = false;
+                sendData(posData);
+                posData = "";
+            }
+        }
 
-                if (userPose.poseStatus & Argon.PoseStatus.KNOWN) {
-                    userLocation.position.copy(userPose.position);
-                } else {
+    } else if (step == portal_step) {
 
-                    return;
-                }
+        var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+        tramScene.position.copy(tramScenePos.position);
+        tramScene.quaternion.copy(tramScenePos.orientation);
 
-                // udpate our scene matrices
-                scene.updateMatrixWorld();
+        objPose = tramScene.getWorldPosition();
 
-                if (isRecordingPose) {
-                    if (recordingStep >= 60) {
-                        var camDir = camera.getWorldDirection();
-                        camera.updateMatrixWorld();
-                        //    var cameraPos = userLocation.position;
-                        posData = posData + userLocation.position.x + " " + userLocation.position.y + " " + userLocation.position.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
-                    }
-                    recordingStep++;
-                }
+        if (isSearching) {
+            if (isBtnClicked) {
+                scene.remove(graffitiTramScene);
+                isBtnClicked = false;
+                isSearching = false;
+                scene.add(tramScene);
+                tramScene.position.z = 0;
+                document.getElementById("thumb").src = "resources/imgs/moveThumb.jpg";
+                isPlacing = true;
+                document.getElementById("arrow").style.display = "none";
+            }
+        } else if (isPlacing) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                isPlacing = false;
+                document.getElementById("slider").style.display = "none";
+                document.getElementById("timeportal-slider").style.display = "none";
+                document.getElementById("heading").innerHTML = "Take a screenshot";
+                document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
+                isTakingScreenshot = true;
+                scene.add(box1Obj);
+                scene.add(box2Obj);
+                box1Obj.position.copy(tramMarkerPose.position);
+                box2Obj.position.copy(tramMarkerPose.position);
+                box2Obj.position.z = box2Obj.position.z - 0.5;
+                box2Obj.position.x = box2Obj.position.x + 1.5;
+                box2Obj.position.y = box2Obj.position.y + 0.5;
+                isRecordingPose = true;
+            }
+        } else if (isTakingScreenshot) {
+            if (isBtnClicked) {
+                isRecordingPose = false;
+                sendData(posData);
+                posData = "";
+                isBtnClicked = false;
+                step++;
+                document.getElementById("thumb").src = "resources/imgs/tram_thumb.jpg";
+                document.getElementById("doneBtn").style.display = "none";
+                document.getElementById("heading").innerHTML = "Find the marker";
+                document.getElementById("instructions-schedule-find").style.display = "inline";
+                isTakingScreenshot = false;
+                scene.remove(box1Obj);
+                scene.remove(box2Obj);
+            }
+        }
+    } else {
 
-                var graffitiStepVal = document.getElementById('graffiti-slider').value;
-                graffitiTram.position.y = graffitiStepVal * 0.003;
-                graffitiTram.position.x = graffitiStepVal * 0.005;
+        var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
+        schedule.position.copy(schedulePos.position);
+        schedule.quaternion.copy(schedulePos.orientation);
 
-                var timePortalStepVal = document.getElementById('timeportal-slider').value;
-                tramBase.position.z = timePortalStepVal * 0.01;
-                tramFrame.position.z = timePortalStepVal * 0.01;
+        objPose = schedule.getWorldPosition();
 
-                var rotationVal = document.getElementById('schedule-slider').value;
-                scheduleBox.rotation.y = rotationVal * 0.01745329252;
+        if (isSearching) {
+            if (isBtnClicked) {
+                scene.remove(tramScene);
+                isSearching = false;
+                isBtnClicked = false;
+                markerObject.add(schedule);
+                document.getElementById("thumb").src = "resources/imgs/moveScheduleThumb.jpg";
+                isPlacing = true;
+                document.getElementById("arrow").style.display = "none";
+            }
+        } else if (isPlacing) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                isPlacing = false;
+                document.getElementById("slider").style.display = "none";
+                document.getElementById("heading").innerHTML = "Take a screenshot";
+                document.getElementById("instructions-schedule-screenshot").style.display = "inline";
+                isTakingScreenshot = true;
+                scene.add(box1Obj);
+                scene.add(box2Obj);
+                box1Obj.position.copy(markerPose.position);
+                box2Obj.position.copy(markerPose.position);
+                box2Obj.position.z = box2Obj.position.z - 0.5;
+                box2Obj.position.x = box2Obj.position.x + 1.5;
+                box2Obj.position.y = box2Obj.position.y + 0.5;
+                isRecordingPose = true;
+            }
+        } else if (isTakingScreenshot) {
+            if (isBtnClicked) {
+                isBtnClicked = false;
+                step++;
+                scene.remove(markerObject);
+                document.getElementById("doneBtn").style.display = "none";
+                document.getElementById("heading").innerHTML = "You are finished";
+                isTakingScreenshot = false;
+                scene.remove(box1Obj);
+                scene.remove(box2Obj);
+                isRecordingPose = false;
+                sendData(posData);
+                posData = "";
+            }
+        } else {
+            document.getElementById("doneBtn").style.display = "none";
+        }
+    }
+
+    var userPose = app.context.getEntityPose(app.context.user);
+
+    if (userPose.poseStatus & Argon.PoseStatus.KNOWN) {
+        userLocation.position.copy(userPose.position);
+    } else {
+
+        return;
+    }
+
+    // udpate our scene matrices
+    scene.updateMatrixWorld();
+
+    if (isRecordingPose) {
+        if (recordingStep >= 60) {
+            var camDir = camera.getWorldDirection();
+            camera.updateMatrixWorld();
+            //    var cameraPos = userLocation.position;
+            posData = posData + userLocation.position.x + " " + userLocation.position.y + " " + userLocation.position.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+        }
+        recordingStep++;
+    }
+
+    var graffitiStepVal = document.getElementById('graffiti-slider').value;
+    graffitiTram.position.y = graffitiStepVal * 0.003;
+    graffitiTram.position.x = graffitiStepVal * 0.005;
+
+    var timePortalStepVal = document.getElementById('timeportal-slider').value;
+    tramBase.position.z = timePortalStepVal * 0.01;
+    tramFrame.position.z = timePortalStepVal * 0.01;
+
+    var rotationVal = document.getElementById('schedule-slider').value;
+    scheduleBox.rotation.y = rotationVal * 0.01745329252;
 
 
-                 /*// get the local coordinates of the local box, and set the THREE object
+    /*// get the local coordinates of the local box, and set the THREE object
                 var boxPose = app.context.getEntityPose(boxGeoEntity);
                 boxGeoObject.position.copy(boxPose.position);
                 boxGeoObject.quaternion.copy(boxPose.orientation);
@@ -381,319 +381,319 @@ app.updateEvent.addEventListener(function (frame) {
             boxLLA.height
         ];
                 } */
-                // we'll compute the distance to the cube, just for fun. 
-                // If the cube could be further away, we'd want to use 
-                // Cesium.EllipsoidGeodesic, rather than Euclidean distance, 
-                // but this is fine here.
-               /* var userPos = userLocation.getWorldPosition();
-                var objPose = box.getWorldPosition();
-                var distanceToBox = userPos.distanceTo(boxPos);*/
+    // we'll compute the distance to the cube, just for fun. 
+    // If the cube could be further away, we'd want to use 
+    // Cesium.EllipsoidGeodesic, rather than Euclidean distance, 
+    // but this is fine here.
+    /* var userPos = userLocation.getWorldPosition();
+     var objPose = box.getWorldPosition();
+     var distanceToBox = userPos.distanceTo(boxPos);*/
 
-                var camDir = camera.getWorldDirection();
-                camera.updateMatrixWorld();
-                var a = camera.position.clone();
-                a.applyMatrix3(camera.matrixWorld);
-                var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
-                b.sub(a);
-                var c = new THREE.Vector3(objPose.position.x, objPose.position.y, objPose.position.z);
-                c.sub(a);
-                b.cross(c);
+    var camDir = camera.getWorldDirection();
+    camera.updateMatrixWorld();
+    var a = camera.position.clone();
+    a.applyMatrix3(camera.matrixWorld);
+    var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
+    b.sub(a);
+    var c = new THREE.Vector3(objPose.position.x, objPose.position.y, objPose.position.z);
+    c.sub(a);
+    b.cross(c);
 
-                if (b.z > 0) {
-                    isLeft = true;
-                    document.getElementById("arrow").src = "resources/leftArrow.png";
-                } else {
-                    isLeft = false;
-                    document.getElementById("arrow").src = "resources/rightArrow.png";
-                }
-
-
-
-                /* camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
-                 var mat = new THREE.Matrix4().multiply( camera.matrixWorldInverse, boxGeoObject.matrixWorld );
-                 var pos = mat.multiplyVector3( boxGeoObject.position.clone() );
-                 var camVec = new THREE.Vector3(0, 0, -1);
-                 var objDirVec = pos.normalize();
-
-                 var dot = camVec.x*objDirVec.x + camVec.z*objDirVec.z;*/
+    if (b.z > 0) {
+        isLeft = true;
+        document.getElementById("arrow").src = "resources/leftArrow.png";
+    } else {
+        isLeft = false;
+        document.getElementById("arrow").src = "resources/rightArrow.png";
+    }
 
 
 
-                var infoText = 'cross3:<br>';
-                infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
-                infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
-                infoText += 'dot + ' + b.z;
-                var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
-                boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
-                if (lastInfoText !== infoText) {
-                    locationElements[0].innerHTML = infoText;
-                    lastInfoText = infoText;
-                }
-                if (lastBoxText !== boxLabelText) {
-                    boxLocDiv.innerHTML = boxLabelText;
-                    lastBoxText = boxLabelText;
-                }
-            });
+    /* camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
+     var mat = new THREE.Matrix4().multiply( camera.matrixWorldInverse, boxGeoObject.matrixWorld );
+     var pos = mat.multiplyVector3( boxGeoObject.position.clone() );
+     var camVec = new THREE.Vector3(0, 0, -1);
+     var objDirVec = pos.normalize();
 
-        app.renderEvent.addEventListener(function () {
+     var dot = camVec.x*objDirVec.x + camVec.z*objDirVec.z;
 
-            var viewport = app.view.getViewport();
-            renderer.setSize(viewport.width, viewport.height);
-            cssRenderer.setSize(viewport.width, viewport.height);
-            hud.setSize(viewport.width, viewport.height);
 
-            for (var _i = 0, _a = app.view.getSubviews(); _i < _a.length; _i++) {
-                var subview = _a[_i];
-                var frustum = subview.frustum;
 
-                camera.position.copy(subview.pose.position);
-                camera.quaternion.copy(subview.pose.orientation);
+    var infoText = 'cross3:<br>';
+    infoText += 'Your location is lla (' + toFixed(gpsCartographicDeg[0], 6) + ', ';
+    infoText += toFixed(gpsCartographicDeg[1], 6) + ', ' + toFixed(gpsCartographicDeg[2], 2) + ')';
+    infoText += 'dot + ' + b.z;
+    var boxLabelText = 'a wooden box!<br>lla = ' + toFixed(boxCartographicDeg[0], 6) + ', ';
+    boxLabelText += toFixed(boxCartographicDeg[1], 6) + ', ' + toFixed(boxCartographicDeg[2], 2);
+    if (lastInfoText !== infoText) {
+        locationElements[0].innerHTML = infoText;
+        lastInfoText = infoText;
+    }
+    if (lastBoxText !== boxLabelText) {
+        boxLocDiv.innerHTML = boxLabelText;
+        lastBoxText = boxLabelText;
+    }*/
+});
 
-                camera.projectionMatrix.fromArray(subview.projectionMatrix);
+app.renderEvent.addEventListener(function () {
 
-                var _b = subview.viewport,
-                    x = _b.x,
-                    y = _b.y,
-                    width = _b.width,
-                    height = _b.height;
+    var viewport = app.view.getViewport();
+    renderer.setSize(viewport.width, viewport.height);
+    cssRenderer.setSize(viewport.width, viewport.height);
+    hud.setSize(viewport.width, viewport.height);
 
-                camera.fov = THREE.Math.radToDeg(frustum.fovy);
-                cssRenderer.setViewport(x, y, width, height, subview.index);
-                cssRenderer.render(scene, camera, subview.index);
+    for (var _i = 0, _a = app.view.getSubviews(); _i < _a.length; _i++) {
+        var subview = _a[_i];
+        var frustum = subview.frustum;
 
-                renderer.setViewport(x, y, width, height);
-                renderer.setScissor(x, y, width, height);
-                renderer.setScissorTest(true);
-                renderer.render(scene, camera);
+        camera.position.copy(subview.pose.position);
+        camera.quaternion.copy(subview.pose.orientation);
 
-                hud.setViewport(x, y, width, height, subview.index);
-                hud.render(subview.index);
-            }
+        camera.projectionMatrix.fromArray(subview.projectionMatrix);
+
+        var _b = subview.viewport,
+            x = _b.x,
+            y = _b.y,
+            width = _b.width,
+            height = _b.height;
+
+        camera.fov = THREE.Math.radToDeg(frustum.fovy);
+        cssRenderer.setViewport(x, y, width, height, subview.index);
+        cssRenderer.render(scene, camera, subview.index);
+
+        renderer.setViewport(x, y, width, height);
+        renderer.setScissor(x, y, width, height);
+        renderer.setScissorTest(true);
+        renderer.render(scene, camera);
+
+        hud.setViewport(x, y, width, height, subview.index);
+        hud.render(subview.index);
+    }
+});
+
+function loadTramScene() {
+    var tramMesh;
+    var tramTextureLoader = new THREE.TextureLoader();
+    var tramGeometry = new THREE.Geometry();
+    var tramLoader = new THREE.JSONLoader();
+    tramLoader.load('resources/obj/tram/tram.js', function (tramGeometry) {
+        var tramMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: tramTextureLoader.load('resources/obj/tram/b_tramBase_Albedo.png')
         });
+        tramMesh = new THREE.Mesh(tramGeometry, tramMaterial);
+        tramBase.add(tramMesh);
+        tramMesh.renderOrder = 2;
+        tramMesh.scale.set(.4, .4, .4);
+    });
 
-        function loadTramScene() {
-            var tramMesh;
-            var tramTextureLoader = new THREE.TextureLoader();
-            var tramGeometry = new THREE.Geometry();
-            var tramLoader = new THREE.JSONLoader();
-            tramLoader.load('resources/obj/tram/tram.js', function (tramGeometry) {
-                var tramMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: tramTextureLoader.load('resources/obj/tram/b_tramBase_Albedo.png')
-                });
-                tramMesh = new THREE.Mesh(tramGeometry, tramMaterial);
-                tramBase.add(tramMesh);
-                tramMesh.renderOrder = 2;
-                tramMesh.scale.set(.4, .4, .4);
-            });
-
-            var portalMesh;
-            var portalTextureLoader = new THREE.TextureLoader();
-            var portalGeometry = new THREE.Geometry();
-            var portalLoader = new THREE.JSONLoader();
-            portalLoader.load('resources/obj/tram/stoneportal.js', function (portalGeometry) {
-                var portalMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: portalTextureLoader.load('resources/obj/tram/bricks.jpg')
-                });
-                portalMesh = new THREE.Mesh(portalGeometry, portalMaterial);
-                portalMesh.renderOrder = 0;
-                portal.add(portalMesh);
-                portalMesh.scale.set(.4, .4, .4);
-            });
+    var portalMesh;
+    var portalTextureLoader = new THREE.TextureLoader();
+    var portalGeometry = new THREE.Geometry();
+    var portalLoader = new THREE.JSONLoader();
+    portalLoader.load('resources/obj/tram/stoneportal.js', function (portalGeometry) {
+        var portalMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: portalTextureLoader.load('resources/obj/tram/bricks.jpg')
+        });
+        portalMesh = new THREE.Mesh(portalGeometry, portalMaterial);
+        portalMesh.renderOrder = 0;
+        portal.add(portalMesh);
+        portalMesh.scale.set(.4, .4, .4);
+    });
 
 
-            var frameMesh;
-            var frameTextureLoader = new THREE.TextureLoader();
-            var frameGeometry = new THREE.Geometry();
-            var frameLoader = new THREE.JSONLoader();
-            frameLoader.load('resources/obj/tram/frame.js', function (frameGeometry) {
-                var frameMaterial = new THREE.MeshLambertMaterial({
-                    color: 0x000000
-                });
-                frameMesh = new THREE.Mesh(frameGeometry, frameMaterial);
-                frameMesh.renderOrder = 2;
-                tramFrame.add(frameMesh);
-                frameMesh.scale.set(.4, .4, .4);
-            });
+    var frameMesh;
+    var frameTextureLoader = new THREE.TextureLoader();
+    var frameGeometry = new THREE.Geometry();
+    var frameLoader = new THREE.JSONLoader();
+    frameLoader.load('resources/obj/tram/frame.js', function (frameGeometry) {
+        var frameMaterial = new THREE.MeshLambertMaterial({
+            color: 0x000000
+        });
+        frameMesh = new THREE.Mesh(frameGeometry, frameMaterial);
+        frameMesh.renderOrder = 2;
+        tramFrame.add(frameMesh);
+        frameMesh.scale.set(.4, .4, .4);
+    });
 
-            var platformMesh;
-            var platformTextureLoader = new THREE.TextureLoader();
-            var platformGeometry = new THREE.Geometry();
-            var platformLoader = new THREE.JSONLoader();
-            platformLoader.load('resources/obj/tram/platform.js', function (platformGeometry) {
-                var platformMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: platformTextureLoader.load('resources/obj/tram/platformTexture.png')
-                });
-                platformMesh = new THREE.Mesh(platformGeometry, platformMaterial);
-                platformMesh.renderOrder = 2;
-                platform.add(platformMesh);
-                platformMesh.scale.set(.4, .4, .4);
-            });
+    var platformMesh;
+    var platformTextureLoader = new THREE.TextureLoader();
+    var platformGeometry = new THREE.Geometry();
+    var platformLoader = new THREE.JSONLoader();
+    platformLoader.load('resources/obj/tram/platform.js', function (platformGeometry) {
+        var platformMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: platformTextureLoader.load('resources/obj/tram/platformTexture.png')
+        });
+        platformMesh = new THREE.Mesh(platformGeometry, platformMaterial);
+        platformMesh.renderOrder = 2;
+        platform.add(platformMesh);
+        platformMesh.scale.set(.4, .4, .4);
+    });
 
-            var invisibilityContainerMesh;
-            var invisibilityContainerTextureLoader = new THREE.TextureLoader();
-            var invisibilityContainerGeometry = new THREE.Geometry();
-            var invisibilityContainerLoader = new THREE.JSONLoader();
-            invisibilityContainerLoader.load('resources/obj/tram/invisibilityContainer.js', function (invisibilityContainerGeometry) {
-                var invisibilityContainerMaterial = new THREE.MeshPhongMaterial();
-                invisibilityContainerMesh = new THREE.Mesh(invisibilityContainerGeometry, invisibilityContainerMaterial);
-                invisibilityContainerMesh.material.color.set(0x001100);
-                invisibilityContainerMesh.material.colorWrite = false;
-                invisibilityContainerMesh.renderOrder = 1;
-                invisibilityContainer.add(invisibilityContainerMesh);
-                invisibilityContainerMesh.scale.set(.4, .4, .4);
-            });
+    var invisibilityContainerMesh;
+    var invisibilityContainerTextureLoader = new THREE.TextureLoader();
+    var invisibilityContainerGeometry = new THREE.Geometry();
+    var invisibilityContainerLoader = new THREE.JSONLoader();
+    invisibilityContainerLoader.load('resources/obj/tram/invisibilityContainer.js', function (invisibilityContainerGeometry) {
+        var invisibilityContainerMaterial = new THREE.MeshPhongMaterial();
+        invisibilityContainerMesh = new THREE.Mesh(invisibilityContainerGeometry, invisibilityContainerMaterial);
+        invisibilityContainerMesh.material.color.set(0x001100);
+        invisibilityContainerMesh.material.colorWrite = false;
+        invisibilityContainerMesh.renderOrder = 1;
+        invisibilityContainer.add(invisibilityContainerMesh);
+        invisibilityContainerMesh.scale.set(.4, .4, .4);
+    });
 
-            var skyMesh;
-            var skyTextureLoader = new THREE.TextureLoader();
-            var skyGeometry = new THREE.Geometry();
-            var skyLoader = new THREE.JSONLoader();
-            skyLoader.load('resources/obj/tram/SkyBox.js', function (skyGeometry) {
-                var skyMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: skyTextureLoader.load('resources/obj/tram/BlueSky.jpg')
-                });
-                skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
-                skyMesh.material.side = THREE.BackSide;
-                skyMesh.renderOrder = 2;
-                sky.add(skyMesh);
-                skyMesh.scale.set(.4, .4, .4);
-            });
+    var skyMesh;
+    var skyTextureLoader = new THREE.TextureLoader();
+    var skyGeometry = new THREE.Geometry();
+    var skyLoader = new THREE.JSONLoader();
+    skyLoader.load('resources/obj/tram/SkyBox.js', function (skyGeometry) {
+        var skyMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: skyTextureLoader.load('resources/obj/tram/BlueSky.jpg')
+        });
+        skyMesh = new THREE.Mesh(skyGeometry, skyMaterial);
+        skyMesh.material.side = THREE.BackSide;
+        skyMesh.renderOrder = 2;
+        sky.add(skyMesh);
+        skyMesh.scale.set(.4, .4, .4);
+    });
 
-            var groundMesh;
-            var groundTextureLoader = new THREE.TextureLoader();
-            var groundGeometry = new THREE.Geometry();
-            var groundLoader = new THREE.JSONLoader();
-            groundLoader.load('resources/obj/tram/ground.js', function (groundGeometry) {
-                var groundMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: groundTextureLoader.load('resources/obj/tram/Ground_basecolor.png')
-                });
-                groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
-                groundMesh.renderOrder = 2;
-                ground.add(groundMesh);
-                groundMesh.scale.set(.4, .4, .4);
-            });
+    var groundMesh;
+    var groundTextureLoader = new THREE.TextureLoader();
+    var groundGeometry = new THREE.Geometry();
+    var groundLoader = new THREE.JSONLoader();
+    groundLoader.load('resources/obj/tram/ground.js', function (groundGeometry) {
+        var groundMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: groundTextureLoader.load('resources/obj/tram/Ground_basecolor.png')
+        });
+        groundMesh = new THREE.Mesh(groundGeometry, groundMaterial);
+        groundMesh.renderOrder = 2;
+        ground.add(groundMesh);
+        groundMesh.scale.set(.4, .4, .4);
+    });
 
-            var stadshusetMesh;
-            var stadshusetTextureLoader = new THREE.TextureLoader();
-            var stadshusetGeometry = new THREE.Geometry();
-            var stadshusetLoader = new THREE.JSONLoader();
-            stadshusetLoader.load('resources/obj/tram/stadshuset.js', function (stadshusetGeometry) {
-                var stadshusetMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: stadshusetTextureLoader.load('resources/obj/tram/stadshuset.png'),
-                    transparent: true
-                });
-                stadshusetMesh = new THREE.Mesh(stadshusetGeometry, stadshusetMaterial);
-                stadshusetMesh.renderOrder = 2;
-                stadshuset.add(stadshusetMesh);
-                stadshusetMesh.scale.set(.4, .4, .4);
-            });
+    var stadshusetMesh;
+    var stadshusetTextureLoader = new THREE.TextureLoader();
+    var stadshusetGeometry = new THREE.Geometry();
+    var stadshusetLoader = new THREE.JSONLoader();
+    stadshusetLoader.load('resources/obj/tram/stadshuset.js', function (stadshusetGeometry) {
+        var stadshusetMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: stadshusetTextureLoader.load('resources/obj/tram/stadshuset.png'),
+            transparent: true
+        });
+        stadshusetMesh = new THREE.Mesh(stadshusetGeometry, stadshusetMaterial);
+        stadshusetMesh.renderOrder = 2;
+        stadshuset.add(stadshusetMesh);
+        stadshusetMesh.scale.set(.4, .4, .4);
+    });
 
-            tramScene.add(tramBase);
-            tramScene.add(tramFrame);
-            tramScene.add(platform);
-            tramScene.add(invisibilityContainer);
-            tramScene.add(portal);
-            tramScene.add(sky);
-            tramScene.add(ground);
-            tramScene.add(stadshuset);
-        }
+    tramScene.add(tramBase);
+    tramScene.add(tramFrame);
+    tramScene.add(platform);
+    tramScene.add(invisibilityContainer);
+    tramScene.add(portal);
+    tramScene.add(sky);
+    tramScene.add(ground);
+    tramScene.add(stadshuset);
+}
 
 
-        function loadgraffitiScene() {
+function loadgraffitiScene() {
 
-            var graffitiBgMesh;
-            var graffitiBgTextureLoader = new THREE.TextureLoader();
-            var graffitiBgGeometry = new THREE.Geometry();
-            var graffitiBgLoader = new THREE.JSONLoader();
-            graffitiBgLoader.load('resources/obj/tram/banksyTramBg.js', function (graffitiBgGeometry) {
-                var graffitiBgMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: graffitiBgTextureLoader.load('resources/obj/tram/banksyTrainBackground.png')
+    var graffitiBgMesh;
+    var graffitiBgTextureLoader = new THREE.TextureLoader();
+    var graffitiBgGeometry = new THREE.Geometry();
+    var graffitiBgLoader = new THREE.JSONLoader();
+    graffitiBgLoader.load('resources/obj/tram/banksyTramBg.js', function (graffitiBgGeometry) {
+        var graffitiBgMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: graffitiBgTextureLoader.load('resources/obj/tram/banksyTrainBackground.png')
 
-                });
-                graffitiBgMesh = new THREE.Mesh(graffitiBgGeometry, graffitiBgMaterial);
-                graffitiBgMesh.renderOrder = 2;
-                graffitiTramBg.add(graffitiBgMesh);
-            });
+        });
+        graffitiBgMesh = new THREE.Mesh(graffitiBgGeometry, graffitiBgMaterial);
+        graffitiBgMesh.renderOrder = 2;
+        graffitiTramBg.add(graffitiBgMesh);
+    });
 
-            var graffitiTramMesh;
-            var graffitiTramTextureLoader = new THREE.TextureLoader();
-            var graffitiTramGeometry = new THREE.Geometry();
-            var graffitiTramLoader = new THREE.JSONLoader();
-            graffitiTramLoader.load('resources/obj/tram/banksyTram.js', function (graffitiTramGeometry) {
-                var graffitiTramMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: graffitiTramTextureLoader.load('resources/obj/tram/banksyTrain.png'),
-                    transparent: true
-                });
-                graffitiTramMesh = new THREE.Mesh(graffitiTramGeometry, graffitiTramMaterial);
-                graffitiTramMesh.renderOrder = 2;
-                graffitiTram.add(graffitiTramMesh);
-            });
+    var graffitiTramMesh;
+    var graffitiTramTextureLoader = new THREE.TextureLoader();
+    var graffitiTramGeometry = new THREE.Geometry();
+    var graffitiTramLoader = new THREE.JSONLoader();
+    graffitiTramLoader.load('resources/obj/tram/banksyTram.js', function (graffitiTramGeometry) {
+        var graffitiTramMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: graffitiTramTextureLoader.load('resources/obj/tram/banksyTrain.png'),
+            transparent: true
+        });
+        graffitiTramMesh = new THREE.Mesh(graffitiTramGeometry, graffitiTramMaterial);
+        graffitiTramMesh.renderOrder = 2;
+        graffitiTram.add(graffitiTramMesh);
+    });
 
-            var maskingPlaneMesh;
-            var maskingPlaneTextureLoader = new THREE.TextureLoader();
-            var maskingPlaneGeometry = new THREE.Geometry();
-            var maskingPlaneLoader = new THREE.JSONLoader();
-            maskingPlaneLoader.load('resources/obj/tram/maskingPlane.js', function (maskingPlaneGeometry) {
-                var maskingPlaneMaterial = new THREE.MeshPhongMaterial();
-                maskingPlaneMesh = new THREE.Mesh(maskingPlaneGeometry, maskingPlaneMaterial);
-                maskingPlaneMesh.material.color.set(0x001100);
-                maskingPlaneMesh.material.colorWrite = false;
-                maskingPlaneMesh.renderOrder = 1;
-                graffitiMaskingPlane.add(maskingPlaneMesh);
-            });
+    var maskingPlaneMesh;
+    var maskingPlaneTextureLoader = new THREE.TextureLoader();
+    var maskingPlaneGeometry = new THREE.Geometry();
+    var maskingPlaneLoader = new THREE.JSONLoader();
+    maskingPlaneLoader.load('resources/obj/tram/maskingPlane.js', function (maskingPlaneGeometry) {
+        var maskingPlaneMaterial = new THREE.MeshPhongMaterial();
+        maskingPlaneMesh = new THREE.Mesh(maskingPlaneGeometry, maskingPlaneMaterial);
+        maskingPlaneMesh.material.color.set(0x001100);
+        maskingPlaneMesh.material.colorWrite = false;
+        maskingPlaneMesh.renderOrder = 1;
+        graffitiMaskingPlane.add(maskingPlaneMesh);
+    });
 
-            graffitiTramScene.add(graffitiTramBg);
-            graffitiTramScene.add(graffitiTram);
-            graffitiTramScene.add(graffitiMaskingPlane);
-        }
+    graffitiTramScene.add(graffitiTramBg);
+    graffitiTramScene.add(graffitiTram);
+    graffitiTramScene.add(graffitiMaskingPlane);
+}
 
-        function loadSchedule() {
-            var schedulePostMesh;
-            var schedulePostTextureLoader = new THREE.TextureLoader();
-            var schedulePostGeometry = new THREE.Geometry();
-            var schedulePostLoader = new THREE.JSONLoader();
-            schedulePostLoader.load('resources/obj/tram/SchedulePost.js', function (schedulePostGeometry) {
-                var schedulePostMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: schedulePostTextureLoader.load('resources/obj/tram/post.jpg')
-                });
-                schedulePostMesh = new THREE.Mesh(schedulePostGeometry, schedulePostMaterial);
-                schedulePost.add(schedulePostMesh);
-            });
+function loadSchedule() {
+    var schedulePostMesh;
+    var schedulePostTextureLoader = new THREE.TextureLoader();
+    var schedulePostGeometry = new THREE.Geometry();
+    var schedulePostLoader = new THREE.JSONLoader();
+    schedulePostLoader.load('resources/obj/tram/SchedulePost.js', function (schedulePostGeometry) {
+        var schedulePostMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: schedulePostTextureLoader.load('resources/obj/tram/post.jpg')
+        });
+        schedulePostMesh = new THREE.Mesh(schedulePostGeometry, schedulePostMaterial);
+        schedulePost.add(schedulePostMesh);
+    });
 
-            var scheduleBoxMesh;
-            var scheduleBoxTextureLoader = new THREE.TextureLoader();
-            var scheduleBoxGeometry = new THREE.Geometry();
-            var scheduleBoxLoader = new THREE.JSONLoader();
-            scheduleBoxLoader.load('resources/obj/tram/ScheduleBox.js', function (scheduleBoxGeometry) {
-                var scheduleBoxMaterial = new THREE.MeshPhongMaterial({
-                    specular: 0x111111,
-                    map: scheduleBoxTextureLoader.load('resources/obj/tram/box.png')
-                });
-                scheduleBoxMesh = new THREE.Mesh(scheduleBoxGeometry, scheduleBoxMaterial);
-                scheduleBox.add(scheduleBoxMesh);
-            });
+    var scheduleBoxMesh;
+    var scheduleBoxTextureLoader = new THREE.TextureLoader();
+    var scheduleBoxGeometry = new THREE.Geometry();
+    var scheduleBoxLoader = new THREE.JSONLoader();
+    scheduleBoxLoader.load('resources/obj/tram/ScheduleBox.js', function (scheduleBoxGeometry) {
+        var scheduleBoxMaterial = new THREE.MeshPhongMaterial({
+            specular: 0x111111,
+            map: scheduleBoxTextureLoader.load('resources/obj/tram/box.png')
+        });
+        scheduleBoxMesh = new THREE.Mesh(scheduleBoxGeometry, scheduleBoxMaterial);
+        scheduleBox.add(scheduleBoxMesh);
+    });
 
-            schedule.add(schedulePost);
-            schedule.add(scheduleBox);
-        }
+    schedule.add(schedulePost);
+    schedule.add(scheduleBox);
+}
 
-        function btnClicked() {
-            isBtnClicked = true;
-            document.getElementById("doneBtn").style.display = "none";
-        }
+function btnClicked() {
+    isBtnClicked = true;
+    document.getElementById("doneBtn").style.display = "none";
+}
 
-        function sendData(postData) {
-            var data = new FormData();
-            data.append("data", postData);
-            var xhr = new XMLHttpRequest();
-            xhr.open('post', 'https://stockholmmarker.000webhostapp.com/index.php', true);
-            xhr.send(data);
-        }
+function sendData(postData) {
+    var data = new FormData();
+    data.append("data", postData);
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', 'https://stockholmmarker.000webhostapp.com/index.php', true);
+    xhr.send(data);
+}
