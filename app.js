@@ -30,7 +30,7 @@ var isBtnClicked = false;
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera();
-var userLocation = new THREE.Object3D;
+var userLocation = new THREE.Object3D();
 scene.add(camera);
 scene.add(userLocation);
 
@@ -67,6 +67,23 @@ hudContent.appendChild(hudDescription);
 var arrow = document.getElementById('arrow');
 arrowContainer.add(arrow);
 hudContent.add(arrowContainer);*/
+
+// -- CREATE BOXES --
+var box1Geometry = new THREE.BoxGeometry(0.3, 1, 0.3);
+var box1Material = new THREE.MeshBasicMaterial({
+    color: 0xff0000
+});
+var box1 = new THREE.Mesh(box1Geometry, box1Material);
+var box1Obj = new THREE.Object3D();
+box1Obj.add(box1);
+
+var box2Geometry = new THREE.BoxGeometry(0.3, 1, 0.3);
+var box2Material = new THREE.MeshBasicMaterial({
+    color: 0xff0000
+});
+var box2 = new THREE.Mesh(box2Geometry, box2Material);
+var box2Obj = new THREE.Object3D();
+box2Obj.add(box2);
 
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
@@ -106,6 +123,11 @@ var schedule = new THREE.Object3D();
 var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
 loadSchedule();
+var scheduleGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97);
+var scheduleGeoEntity = new Argon.Cesium.Entity({
+    position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
+    orientation: Cesium.Quaternion.IDENTITY
+});
 //scene.add(schedule);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
@@ -186,8 +208,8 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
                 scene.add(box2Obj);
-                box1Obj.position.copy(graffitiMarkerPose.position);
-                box2Obj.position.copy(graffitiMarkerPose.position);
+                box1Obj.position.copy(graffitiTramScene.position);
+                box2Obj.position.copy(graffitiTramScene.position);
                 box2Obj.position.z = box2Obj.position.z - 0.5;
                 box2Obj.position.x = box2Obj.position.x + 1.5;
                 box2Obj.position.y = box2Obj.position.y + 0.5;
@@ -240,8 +262,8 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
                 scene.add(box2Obj);
-                box1Obj.position.copy(tramMarkerPose.position);
-                box2Obj.position.copy(tramMarkerPose.position);
+                box1Obj.position.copy(tramScene.position);
+                box2Obj.position.copy(tramScene.position);
                 box2Obj.position.z = box2Obj.position.z - 0.5;
                 box2Obj.position.x = box2Obj.position.x + 1.5;
                 box2Obj.position.y = box2Obj.position.y + 0.5;
@@ -276,7 +298,7 @@ app.updateEvent.addEventListener(function (frame) {
                 scene.remove(tramScene);
                 isSearching = false;
                 isBtnClicked = false;
-                markerObject.add(schedule);
+                scene.add(schedule);
                 document.getElementById("thumb").src = "resources/imgs/moveScheduleThumb.jpg";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
@@ -291,8 +313,8 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
                 scene.add(box2Obj);
-                box1Obj.position.copy(markerPose.position);
-                box2Obj.position.copy(markerPose.position);
+                box1Obj.position.copy(schedule.position);
+                box2Obj.position.copy(schedule.position);
                 box2Obj.position.z = box2Obj.position.z - 0.5;
                 box2Obj.position.x = box2Obj.position.x + 1.5;
                 box2Obj.position.y = box2Obj.position.y + 0.5;
@@ -302,7 +324,7 @@ app.updateEvent.addEventListener(function (frame) {
             if (isBtnClicked) {
                 isBtnClicked = false;
                 step++;
-                scene.remove(markerObject);
+                scene.remove(schedule);
                 document.getElementById("doneBtn").style.display = "none";
                 document.getElementById("heading").innerHTML = "You are finished";
                 isTakingScreenshot = false;
@@ -393,11 +415,11 @@ app.updateEvent.addEventListener(function (frame) {
      var objPose = box.getWorldPosition();
      var distanceToBox = userPos.distanceTo(boxPos);*/
 
-    var camDir = camera.getWorldDirection();
+    var camDirection = camera.getWorldDirection();
     camera.updateMatrixWorld();
     var a = camera.position.clone();
     a.applyMatrix3(camera.matrixWorld);
-    var b = new THREE.Vector3(a.x + camDir.x, a.y + camDir.y, a.z + camDir.z);
+    var b = new THREE.Vector3(a.x + camDirection.x, a.y + camDirection.y, a.z + camDirection.z);
     b.sub(a);
     var c = new THREE.Vector3(objPose.x, objPose.y, objPose.z);
     c.sub(a);
