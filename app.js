@@ -13,7 +13,7 @@ app.context.setDefaultReferenceFrame(app.context.localOriginEastUpSouth);
 
 var isLeft = false;
 var animationStep = 0;
-var graffitiStep = 520;
+var graffitiStep = 0;
 
 var graffiti_step = 1;
 var portal_step = 2;
@@ -127,7 +127,7 @@ var scheduleGeoEntity = new Argon.Cesium.Entity({
 //var cartesianBox = Cesium.Ellipsoid.WGS84.cartographicToCartesian(llaBox);
 
 
-var boxGeoObject = new THREE.Object3D();
+/*var boxGeoObject = new THREE.Object3D();
 var box = new THREE.Object3D();
 var loader = new THREE.TextureLoader();
 loader.load('box.png', function (texture) {
@@ -145,7 +145,7 @@ boxGeoObject.add(box);
 var boxGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(cesiumPosition, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
-});
+});*/
 
 document.getElementById("instructions-graffiti-find").style.display = "inline";
 
@@ -174,6 +174,8 @@ app.updateEvent.addEventListener(function (frame) {
     var objPose;
 
     if (step == graffiti_step) {
+        
+        scene.add(graffitiTramScene);
 
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
         graffitiTramScene.position.copy(graffitiScenePos.position);
@@ -185,7 +187,6 @@ app.updateEvent.addEventListener(function (frame) {
             if (isBtnClicked) {
                 isBtnClicked = false;
                 isSearching = false;
-                scene.add(graffitiTramScene);
                 document.getElementById("thumb").src = "resources/imgs/moveGraffitiThumb.png";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
@@ -225,7 +226,7 @@ app.updateEvent.addEventListener(function (frame) {
             }
         }
 
-    } else if (step == portal_step) {
+    } /*else if (step == portal_step) {
 
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
@@ -330,7 +331,7 @@ app.updateEvent.addEventListener(function (frame) {
         } else {
             document.getElementById("doneBtn").style.display = "none";
         }
-    }
+    }*/
 
     var userPose = app.context.getEntityPose(app.context.user);
 
@@ -358,12 +359,12 @@ app.updateEvent.addEventListener(function (frame) {
     graffitiTram.position.y = graffitiStepVal * 0.003;
     graffitiTram.position.x = graffitiStepVal * 0.005;
 
-    var timePortalStepVal = document.getElementById('timeportal-slider').value;
+  /*  var timePortalStepVal = document.getElementById('timeportal-slider').value;
     tramBase.position.z = timePortalStepVal * 0.01;
     tramFrame.position.z = timePortalStepVal * 0.01;
 
     var rotationVal = document.getElementById('schedule-slider').value;
-    scheduleBox.rotation.y = rotationVal * 0.01745329252;
+    scheduleBox.rotation.y = rotationVal * 0.01745329252;*/
 
 
     /*// get the local coordinates of the local box, and set the THREE object
