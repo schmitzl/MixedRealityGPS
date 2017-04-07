@@ -34,13 +34,16 @@ button:active {
 }
 
 #description {
+  color: white;
   pointer-events: auto;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  padding: 10px;
-  background-color:rgba(255,255,255,0.7);
+  padding: 5px 10px 5px 10px;
+  background-color:rgba(0,0,0,0.76);
   -webkit-backdrop-filter: blur(5px);
   position:absolute;
-  bottom: 0px;
+  top: 0px;
+  width: 100%;
+  z-index: 2;
 }
 
 .argon-focus #menu {
@@ -69,6 +72,81 @@ button:active {
 	width: 80px;
 	display: block;
 	margin-left: auto;
-    	margin-right: auto;
+    margin-right: auto;
+}
 
+#thumb {
+    width: 50px;
+    height: 50px;
+    display: inline;
+    vertical-align: middle;
+}
+    
+#timeportal-slider {
+    display: none;
+}
+
+#schedule-slider {
+    display: none;
+}
+
+#slider {
+    position: absolute;
+    color: white;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background-color:rgba(0,0,0,0.76);
+    text-align: center;
+}
+
+input {
+    margin: 15px;
+    width: 90%;
+}
+    
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 7px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    vertical-align: middle;
+}
+    
+#doneBtn {
+    display: none;
+}
+    
+#slider {
+    display: none;
+}
+    
+.instructions {
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    vertical-align:middle;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+    display: none;
+}
+
+.instructions-pic {
+    background-color: white;
+    display: block;
+    margin: auto;
+    margin-top: 90px;
+    height: 70%;
+}
+    
+.gotItBtn {
+    float: right;
 }
