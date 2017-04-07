@@ -45,7 +45,7 @@ scene.add(light);
 
 
 var cssRenderer = new THREE.CSS3DArgonRenderer();
-var hud = new THREE.CSS3DArgonHUD();
+//var hud = new THREE.CSS3DArgonHUD();
 var renderer = new THREE.WebGLRenderer({
     alpha: true,
     logarithmicDepthBuffer: true
@@ -54,14 +54,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
 app.view.element.appendChild(renderer.domElement);
 app.view.element.appendChild(cssRenderer.domElement);
-app.view.element.appendChild(hud.domElement);
-
-var hudContent = document.getElementById('hud');
-hud.appendChild(hudContent);
-var locationElements = hudContent.getElementsByClassName('location');
-
-var hudDescription = document.getElementById('description');
-hudContent.appendChild(hudDescription);
+//app.view.element.appendChild(hud.domElement);
 
 /*var arrowContainer = document.getElementById('arrowContainer');
 var arrow = document.getElementById('arrow');
@@ -466,7 +459,7 @@ app.renderEvent.addEventListener(function () {
     var viewport = app.view.getViewport();
     renderer.setSize(viewport.width, viewport.height);
     cssRenderer.setSize(viewport.width, viewport.height);
-    hud.setSize(viewport.width, viewport.height);
+   // hud.setSize(viewport.width, viewport.height);
 
     for (var _i = 0, _a = app.view.getSubviews(); _i < _a.length; _i++) {
         var subview = _a[_i];
@@ -492,8 +485,8 @@ app.renderEvent.addEventListener(function () {
         renderer.setScissorTest(true);
         renderer.render(scene, camera);
 
-        hud.setViewport(x, y, width, height, subview.index);
-        hud.render(subview.index);
+       // hud.setViewport(x, y, width, height, subview.index);
+    //    hud.render(subview.index);
     }
 });
 
