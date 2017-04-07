@@ -150,15 +150,15 @@ var boxGeoEntity = new Argon.Cesium.Entity({
 document.getElementById("instructions-graffiti-find").style.display = "inline";
 
 
-var boxLocDiv = document.getElementById("box-location");
+/*var boxLocDiv = document.getElementById("box-location");
 var boxLabel = new THREE.CSS3DSprite(boxLocDiv);
 boxLabel.scale.set(0.02, 0.02, 0.02);
 boxLabel.position.set(0, 1.25, 0);
-boxGeoObject.add(boxLabel);
+boxGeoObject.add(boxLabel);*/
 
 var boxCartographicDeg = [0, 0, 0];
-var lastInfoText = '';
-var lastBoxText = '';
+//var lastInfoText = '';
+//var lastBoxText = '';
 
 function toFixed(value, precision) {
     var power = Math.pow(10, precision || 0);
