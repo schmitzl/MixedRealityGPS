@@ -150,6 +150,10 @@ function toFixed(value, precision) {
     return String(Math.round(value * power) / power);
 }
 
+var posData = "";
+var isRecordingPose = false;
+var recordingStep = 0;
+
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
