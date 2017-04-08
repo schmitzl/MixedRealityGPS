@@ -194,7 +194,8 @@ app.updateEvent.addEventListener(function (frame) {
         
         if(!isObjInit) {
             graffitiTramScene.position.copy(userPose.position);
-            graffitiTramScene.quaternion.copy(userPose.orientation);
+            //graffitiTramScene.quaternion.copy(userPose.orientation);
+            graffitiTramScene.rotation.y = userPose.rotation.y;
             graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             isObjInit = true;
         }

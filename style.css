@@ -62,6 +62,7 @@ button {
 }
 
 #slider {
+     pointer-events: auto;
     position: absolute;
     color: white;
     bottom: 0;
