@@ -169,17 +169,27 @@ var posData = "";
 var isRecordingPose = false;
 var recordingStep = 0;
 
+scene.add(graffitiTramScene);
+
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
+    
+    var userPose = app.context.getEntityPose(app.context.user);
+
+    if (userPose.poseStatus & Argon.PoseStatus.KNOWN) {
+        userLocation.position.copy(userPose.position);
+    } else {
+
+        return;
+    }
 
     if (step == graffiti_step) {
-        
-        scene.add(graffitiTramScene);
 
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
         graffitiTramScene.position.copy(graffitiScenePos.position);
         graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
+        graffitiTramScene.position.z = userPose.z;
 
         objPose = graffitiTramScene.getWorldPosition();
 
@@ -226,6 +236,7 @@ app.updateEvent.addEventListener(function (frame) {
                 sendData(posData);
                 posData = "";
                 scene.remove(graffitiTramScene);
+                scene.add(tramScene);
                 isSearching = true;
             }
         }
@@ -235,6 +246,7 @@ app.updateEvent.addEventListener(function (frame) {
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
         tramScene.quaternion.copy(tramScenePos.orientation);
+        tramScene.position.z = userPose.z;
 
         objPose = tramScene.getWorldPosition();
 
@@ -242,7 +254,6 @@ app.updateEvent.addEventListener(function (frame) {
             if (isBtnClicked) {
                 isBtnClicked = false;
                 isSearching = false;
-                scene.add(tramScene);
                 tramScene.position.z = 0;
                 document.getElementById("thumb").src = "resources/imgs/moveThumb.jpg";
                 isPlacing = true;
@@ -284,12 +295,14 @@ app.updateEvent.addEventListener(function (frame) {
                 scene.remove(tramScene);
                 isSearching = true;
                 document.getElementById("arrow").style.display = "block";
+                scene.add(schedule);
             }
         }
     } else {
 
         var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
         schedule.position.copy(schedulePos.position);
+        schedule.position.z = userPose.z;
         schedule.quaternion.copy(schedulePos.orientation);
 
         objPose = schedule.getWorldPosition();
@@ -298,7 +311,6 @@ app.updateEvent.addEventListener(function (frame) {
             if (isBtnClicked) {
                 isSearching = false;
                 isBtnClicked = false;
-                scene.add(schedule);
                 document.getElementById("thumb").src = "resources/imgs/moveScheduleThumb.jpg";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
@@ -336,15 +348,6 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = "";
             }
         } 
-    }
-
-    var userPose = app.context.getEntityPose(app.context.user);
-
-    if (userPose.poseStatus & Argon.PoseStatus.KNOWN) {
-        userLocation.position.copy(userPose.position);
-    } else {
-
-        return;
     }
 
     // udpate our scene matrices
