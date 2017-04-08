@@ -171,8 +171,6 @@ var recordingStep = 0;
 
 var isObjInit = false;
 
-scene.add(graffitiTramScene);
-
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
@@ -188,8 +186,6 @@ app.updateEvent.addEventListener(function (frame) {
     
     if (step == graffiti_step) {
 
-           // udpate our scene matrices
-        scene.updateMatrixWorld();
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
 
         objPose = graffitiTramScene.getWorldPosition();
@@ -198,6 +194,7 @@ app.updateEvent.addEventListener(function (frame) {
             graffitiTramScene.position.copy(userPose.position);
             graffitiTramScene.quaternion.copy(userPose.orientation);
             graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
+            scene.add(graffitiTramScene);
             isObjInit = true;
         }
 
