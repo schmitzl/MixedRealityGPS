@@ -218,6 +218,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("doneBtn").style.display = "none";
                 document.getElementById("heading").innerHTML = "Find the object";
                 document.getElementById("instructions-timeportal-find").style.display = "inline";
+                document.getElementById("arrow").style.display = "block";
                 isTakingScreenshot = false;
                 scene.remove(box1Obj);
                 scene.remove(box2Obj);
@@ -282,6 +283,7 @@ app.updateEvent.addEventListener(function (frame) {
                 scene.remove(box2Obj);
                 scene.remove(tramScene);
                 isSearching = true;
+                document.getElementById("arrow").style.display = "block";
             }
         }
     } else {
