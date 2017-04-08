@@ -190,6 +190,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("thumb").src = "resources/imgs/moveGraffitiThumb.png";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
+                document.getElementById("instructions-graffiti-move").style.display = "inline";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -226,7 +227,7 @@ app.updateEvent.addEventListener(function (frame) {
             }
         }
 
-    } /*else if (step == portal_step) {
+    } else if (step == portal_step) {
 
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
@@ -244,6 +245,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("thumb").src = "resources/imgs/moveThumb.jpg";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
+                document.getElementById("instructions-timeportal-move").style.display = "inline";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -296,6 +298,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("thumb").src = "resources/imgs/moveScheduleThumb.jpg";
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
+                document.getElementById("instructions-schedule-move").style.display = "inline";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -328,10 +331,8 @@ app.updateEvent.addEventListener(function (frame) {
                 sendData(posData);
                 posData = "";
             }
-        } else {
-            document.getElementById("doneBtn").style.display = "none";
-        }
-    }*/
+        } 
+    }
 
     var userPose = app.context.getEntityPose(app.context.user);
 
