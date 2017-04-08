@@ -125,6 +125,7 @@ h2 {
     height: 400px;
     background-color: red;
     z-index: 9;
+    display: none;
 }
 
 #redBox1 {

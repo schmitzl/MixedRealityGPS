@@ -207,11 +207,12 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                
+                document.getElementsByClassName("redBox").style.display = "inline";
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
+                document.getElementsByClassName("redBox").style.display = "none";
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
