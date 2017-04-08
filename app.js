@@ -188,10 +188,10 @@ app.updateEvent.addEventListener(function (frame) {
 
            // udpate our scene matrices
     scene.updateMatrixWorld();
-        //var graffitiScenePos = app.context.getEntityPose(app.context.user);
-        graffitiTramScene.position.copy(userPose.position);
+        var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
+        graffitiTramScene.position.copy(graffitiScenePos.position);
         graffitiTramScene.quaternion.copy(userPose.orientation);
-        graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
+        graffitiTramScene.position.y = userPose.position.y;
 
         objPose = graffitiTramScene.getWorldPosition();
 
@@ -203,7 +203,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
                 document.getElementById("instructions-graffiti-move").style.display = "inline";
-                document.getElementById("graffiti-slider").style.display = "none";
+                document.getElementById("graffiti-slider").style.display = "inline";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -433,7 +433,7 @@ app.updateEvent.addEventListener(function (frame) {
             var camDir = camera.getWorldDirection();
             //camera.updateMatrixWorld();
             //    var cameraPos = userLocation.position;
-            posData = posData + userPose.x + " " + userPose.y + " " + userPose.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+            posData = posData + userPose.position.x + " " + userPose.position.y + " " + userPose.position.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
         recordingStep++;
     }
