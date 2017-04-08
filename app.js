@@ -367,7 +367,7 @@ app.updateEvent.addEventListener(function (frame) {
     tramFrame.position.z = timePortalStepVal * 0.01;
 
     var rotationVal = document.getElementById('schedule-slider').value;
-    scheduleBox.rotation.y = rotationVal * 0.01745329252;*/
+    scheduleBox.rotation.y = rotationVal * 0.01745329252;
 
 
     /*// get the local coordinates of the local box, and set the THREE object
