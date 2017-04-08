@@ -196,7 +196,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-graffiti-move").style.display = "inline";
                 document.getElementById("graffiti-slider").style.display = "inline";
                 document.getElementById("slider").style.display = "inline";
-                document.getElementById("heading").innerHTML = "Take a screenshot";
+                document.getElementById("heading").innerHTML = "Move the tram";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -207,12 +207,14 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                document.getElementsByClassName("redBox").style.display = "inline";
+                document.getElementById("redBox1").style.display = "none";
+                document.getElementById("redBox2").style.display = "none";
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
-                document.getElementsByClassName("redBox").style.display = "none";
+                document.getElementById("redBox1").style.display = "none";
+                document.getElementById("redBox2").style.display = "none";
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
