@@ -92,7 +92,7 @@ var stadshuset = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97);
+var tramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, -0.54);                    //(17.920747, 59.374212, 11.97);
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -105,7 +105,7 @@ var graffitiTram = new THREE.Object3D();
 var graffitiMaskingPlane = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
-var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97);
+var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, -0.54);            //(17.920747, 59.374212, 11.97);
 var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -116,7 +116,7 @@ var schedule = new THREE.Object3D();
 var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
 loadSchedule();
-var scheduleGeoPos = Cartesian3.fromDegrees(17.920747, 59.374212, 11.97);
+var scheduleGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, -0.54);                     //(17.920747, 59.374212, 11.97);
 var scheduleGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -224,6 +224,8 @@ app.updateEvent.addEventListener(function (frame) {
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
+                scene.remove(graffitiTramScene);
+                isSearching = true;
             }
         }
 
@@ -237,7 +239,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (isSearching) {
             if (isBtnClicked) {
-                scene.remove(graffitiTramScene);
                 isBtnClicked = false;
                 isSearching = false;
                 scene.add(tramScene);
@@ -279,6 +280,8 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = false;
                 scene.remove(box1Obj);
                 scene.remove(box2Obj);
+                scene.remove(tramScene);
+                isSearching = true;
             }
         }
     } else {
@@ -291,7 +294,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (isSearching) {
             if (isBtnClicked) {
-                scene.remove(tramScene);
                 isSearching = false;
                 isBtnClicked = false;
                 scene.add(schedule);
@@ -360,7 +362,7 @@ app.updateEvent.addEventListener(function (frame) {
     graffitiTram.position.y = graffitiStepVal * 0.003;
     graffitiTram.position.x = graffitiStepVal * 0.005;
 
-  /*  var timePortalStepVal = document.getElementById('timeportal-slider').value;
+    var timePortalStepVal = document.getElementById('timeportal-slider').value;
     tramBase.position.z = timePortalStepVal * 0.01;
     tramFrame.position.z = timePortalStepVal * 0.01;
 
