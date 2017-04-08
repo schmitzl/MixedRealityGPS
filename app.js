@@ -192,7 +192,7 @@ app.updateEvent.addEventListener(function (frame) {
             graffitiTramScene.quaternion.copy(tramScenePos.orientation);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
             //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
-            graffitiTramScene.position.z = userPose.position.z;
+            graffitiTramScene.position.y = userPose.position.y;
             isObjInit = true;
         }
 
@@ -219,7 +219,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
                 box1Obj.position.copy(graffitiTramScene.position);
-                box1Obj.position.x = box1Obj.position.x - 1.5;
+                box1Obj.position.x = box1Obj.position.x - 1;
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
