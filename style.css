@@ -86,6 +86,7 @@ input {
 }
     
 .instructions {
+    pointer-events: auto;
     position: absolute;
     background-color: white;
     width: 100%;
