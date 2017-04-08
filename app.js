@@ -189,7 +189,7 @@ app.updateEvent.addEventListener(function (frame) {
         if(!isObjInit) {
             var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
             graffitiTramScene.position.copy(tramScenePos.position);
-          //  graffitiTramScene.quaternion.copy(tramScenePos.orientation);
+            graffitiTramScene.quaternion.copy(tramScenePos.orientation);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
             //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             graffitiTramScene.position.z = userPose.position.z;
