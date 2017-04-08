@@ -9,14 +9,21 @@
   <body>
     <div id="argon">
       <div id="description" >
-        <h2>A Simple Geo</h2>
-        <button onclick="hideMe(this)">(click to dismiss)</button>
-        <p>This example takes the current location of the viewer, and positions a cube a small distance away from where the viewer was positioned when the example was loaded.  We do this by adding a small amount to our current east-west location, in the local Three.js cartesian coordinates.  This illustrates how to create geospatial content based on the current location, and update the internal geospatial location of the object.</p>
+        <img id="thumb" src="resources/imgs/graffiti_thumb.jpg"/>
+        <h2 id="heading">find the marker1</h2>
       </div>
+        
+        
+        <div class="instructions" id="instructions-graffiti-find">
+            <img class="instructions-pic" src="resources/imgs/findGraffitiObj.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        
     </div>
+      
   </body>
 	<script>
-		function hideMe(elem) {
+		function hideParent(elem) {
 		    elem.parentElement.style.display = 'none';
 		}	
 	</script> 
