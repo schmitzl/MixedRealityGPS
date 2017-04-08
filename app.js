@@ -184,12 +184,16 @@ app.updateEvent.addEventListener(function (frame) {
         return;
     }
 
+    var camDirection = camera.getWorldDirection();
+    camera.updateMatrixWorld();
+    var a = camera.position.clone();
+    
     if (step == graffiti_step) {
 
-        var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
+        var graffitiScenePos = app.context.getEntityPose(app.context.user);
         graffitiTramScene.position.copy(graffitiScenePos.position);
         graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
-        graffitiTramScene.position.z = userPose.z;
+       // graffitiTramScene.position.z = userPose.z;
 
         objPose = graffitiTramScene.getWorldPosition();
 
@@ -358,7 +362,7 @@ app.updateEvent.addEventListener(function (frame) {
             var camDir = camera.getWorldDirection();
             camera.updateMatrixWorld();
             //    var cameraPos = userLocation.position;
-            posData = posData + userLocation.position.x + " " + userLocation.position.y + " " + userLocation.position.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+            posData = posData + a.x + " " + a.y + " " + a.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
         recordingStep++;
     }
@@ -417,9 +421,6 @@ app.updateEvent.addEventListener(function (frame) {
      var objPose = box.getWorldPosition();
      var distanceToBox = userPos.distanceTo(boxPos);*/
 
-    var camDirection = camera.getWorldDirection();
-    camera.updateMatrixWorld();
-    var a = camera.position.clone();
     a.applyMatrix3(camera.matrixWorld);
     var b = new THREE.Vector3(a.x + camDirection.x, a.y + camDirection.y, a.z + camDirection.z);
     b.sub(a);
