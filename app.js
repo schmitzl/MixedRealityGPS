@@ -188,10 +188,10 @@ app.updateEvent.addEventListener(function (frame) {
         
         if(!isObjInit) {
             var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
-            graffitiTramScene.position.copy(userPose.position);
+            graffitiTramScene.position.copy(tramScenePos.position);
             graffitiTramScene.quaternion.copy(tramScenePos.orientation);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
-            graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
+            //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             isObjInit = true;
         }
 
@@ -232,7 +232,6 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("arrow").style.display = "block";
                 isTakingScreenshot = false;
                 scene.remove(box1Obj);
-                scene.remove(box2Obj);
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
