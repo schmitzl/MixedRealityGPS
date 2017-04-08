@@ -229,15 +229,19 @@ app.updateEvent.addEventListener(function (frame) {
                 scene.remove(graffitiTramScene);
                 scene.add(tramScene);
                 isSearching = true;
+                isObjInit = false;
             }
         }
 
-    } /* else if (step == portal_step) {
+    }  else if (step == portal_step) {
 
-        var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
-        tramScene.position.copy(tramScenePos.position);
-        tramScene.quaternion.copy(tramScenePos.orientation);
-        tramScene.position.z = userPose.z;
+        if(!isObjInit) {
+            var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+            tramScene.position.copy(tramScenePos.position);
+            //tramScene.quaternion.copy(tramScenePos.orientation);
+            tramScene.position.y = userPose.y;
+            isObjInit = true;
+        }
 
         objPose = tramScene.getWorldPosition();
 
@@ -250,6 +254,9 @@ app.updateEvent.addEventListener(function (frame) {
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
                 document.getElementById("instructions-timeportal-move").style.display = "inline";
+                document.getElementById("timeportal-slider").style.display = "inline";
+                document.getElementById("slider").style.display = "inline";
+                document.getElementById("heading").innerHTML = "Move the tram";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -260,11 +267,14 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-               
+                document.getElementById("redBox1").style.display = "inline";
+                document.getElementById("redBox2").style.display = "inline";
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
+                document.getElementById("redBox1").style.display = "none";
+                document.getElementById("redBox2").style.display = "none";
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
@@ -280,6 +290,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isSearching = true;
                 document.getElementById("arrow").style.display = "block";
                 scene.add(schedule);
+                isObjInit = false;
             }
         }
     } else {
@@ -327,7 +338,7 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = "";
             }
         } 
-    }*/
+    }
 
     var graffitiStepVal = document.getElementById('graffiti-slider').value;
     graffitiTram.position.y = graffitiStepVal * 0.003;
