@@ -187,6 +187,7 @@ app.updateEvent.addEventListener(function (frame) {
     var camDirection = camera.getWorldDirection();
     camera.updateMatrixWorld();
     var a = camera.position.clone();
+    a.applyMatrix3(camera.matrixWorld);
     
     if (step == graffiti_step) {
 
@@ -421,7 +422,7 @@ app.updateEvent.addEventListener(function (frame) {
      var objPose = box.getWorldPosition();
      var distanceToBox = userPos.distanceTo(boxPos);*/
 
-    a.applyMatrix3(camera.matrixWorld);
+    
     var b = new THREE.Vector3(a.x + camDirection.x, a.y + camDirection.y, a.z + camDirection.z);
     b.sub(a);
     var c = new THREE.Vector3(objPose.x, objPose.y, objPose.z);
