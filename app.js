@@ -171,6 +171,8 @@ var recordingStep = 0;
 
 var isObjInit = false;
 
+scene.add(graffitiTramScene);
+
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
@@ -194,7 +196,6 @@ app.updateEvent.addEventListener(function (frame) {
             graffitiTramScene.position.copy(userPose.position);
            // graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
             graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
-            scene.add(graffitiTramScene);
             isObjInit = true;
         }
 
