@@ -121,8 +121,8 @@ h2 {
 
 .redBox {
     position: absolute;
-    width: 200px;
-    height: 800px;
+    width: 100px;
+    height: 400px;
     background-color: red;
 }
 
