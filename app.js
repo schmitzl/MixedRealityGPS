@@ -183,14 +183,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         return;
     }
-
-    // udpate our scene matrices
-    scene.updateMatrixWorld();
-    
-    var camDirection = camera.getWorldDirection();
-    camera.updateMatrixWorld();
-    var a = camera.position.clone();
-    a.applyMatrix3(camera.matrixWorld);
     
     if (step == graffiti_step) {
 
@@ -199,7 +191,7 @@ app.updateEvent.addEventListener(function (frame) {
         //var graffitiScenePos = app.context.getEntityPose(app.context.user);
         graffitiTramScene.position.copy(userPose.position);
         graffitiTramScene.quaternion.copy(userPose.orientation);
-       // graffitiTramScene.position.z = userPose.z;
+        graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
 
         objPose = graffitiTramScene.getWorldPosition();
 
@@ -211,6 +203,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
                 document.getElementById("instructions-graffiti-move").style.display = "inline";
+                document.getElementById("graffiti-slider").style.display = "none";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
@@ -360,16 +353,6 @@ app.updateEvent.addEventListener(function (frame) {
         } 
     }*/
 
-    if (isRecordingPose) {
-        if (recordingStep >= 60) {
-            var camDir = camera.getWorldDirection();
-            //camera.updateMatrixWorld();
-            //    var cameraPos = userLocation.position;
-            posData = posData + a.x + " " + a.y + " " + a.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
-        }
-        recordingStep++;
-    }
-
     var graffitiStepVal = document.getElementById('graffiti-slider').value;
     graffitiTram.position.y = graffitiStepVal * 0.003;
     graffitiTram.position.x = graffitiStepVal * 0.005;
@@ -424,7 +407,13 @@ app.updateEvent.addEventListener(function (frame) {
      var objPose = box.getWorldPosition();
      var distanceToBox = userPos.distanceTo(boxPos);*/
 
+    // udpate our scene matrices
+    scene.updateMatrixWorld();
     
+    var camDirection = camera.getWorldDirection();
+    camera.updateMatrixWorld();
+    var a = camera.position.clone();
+    a.applyMatrix3(camera.matrixWorld);
     var b = new THREE.Vector3(a.x + camDirection.x, a.y + camDirection.y, a.z + camDirection.z);
     b.sub(a);
     var c = new THREE.Vector3(objPose.x, objPose.y, objPose.z);
@@ -439,6 +428,15 @@ app.updateEvent.addEventListener(function (frame) {
         document.getElementById("arrow").src = "resources/rightArrow.png";
     }
 
+    if (isRecordingPose) {
+        if (recordingStep >= 60) {
+            var camDir = camera.getWorldDirection();
+            //camera.updateMatrixWorld();
+            //    var cameraPos = userLocation.position;
+            posData = posData + userPose.x + " " + userPose.y + " " + userPose.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+        }
+        recordingStep++;
+    }
 
 
     /* camera.matrixWorldInverse.getInverse( camera.matrixWorld ); // may already be computed
