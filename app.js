@@ -184,6 +184,9 @@ app.updateEvent.addEventListener(function (frame) {
         return;
     }
 
+    // udpate our scene matrices
+    scene.updateMatrixWorld();
+    
     var camDirection = camera.getWorldDirection();
     camera.updateMatrixWorld();
     var a = camera.position.clone();
@@ -191,9 +194,11 @@ app.updateEvent.addEventListener(function (frame) {
     
     if (step == graffiti_step) {
 
-        var graffitiScenePos = app.context.getEntityPose(app.context.user);
-        graffitiTramScene.position.copy(graffitiScenePos.position);
-        graffitiTramScene.quaternion.copy(graffitiScenePos.orientation);
+           // udpate our scene matrices
+    scene.updateMatrixWorld();
+        //var graffitiScenePos = app.context.getEntityPose(app.context.user);
+        graffitiTramScene.position.copy(userPose.position);
+        graffitiTramScene.quaternion.copy(userPose.orientation);
        // graffitiTramScene.position.z = userPose.z;
 
         objPose = graffitiTramScene.getWorldPosition();
@@ -246,7 +251,7 @@ app.updateEvent.addEventListener(function (frame) {
             }
         }
 
-    } else if (step == portal_step) {
+    } /* else if (step == portal_step) {
 
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
@@ -353,15 +358,12 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = "";
             }
         } 
-    }
-
-    // udpate our scene matrices
-    scene.updateMatrixWorld();
+    }*/
 
     if (isRecordingPose) {
         if (recordingStep >= 60) {
             var camDir = camera.getWorldDirection();
-            camera.updateMatrixWorld();
+            //camera.updateMatrixWorld();
             //    var cameraPos = userLocation.position;
             posData = posData + a.x + " " + a.y + " " + a.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
