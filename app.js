@@ -207,8 +207,8 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                document.getElementById("redBox1").style.display = "none";
-                document.getElementById("redBox2").style.display = "none";
+                document.getElementById("redBox1").style.display = "inline";
+                document.getElementById("redBox2").style.display = "inline";
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
