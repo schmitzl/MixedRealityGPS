@@ -70,13 +70,7 @@ var box1 = new THREE.Mesh(box1Geometry, box1Material);
 var box1Obj = new THREE.Object3D();
 box1Obj.add(box1);
 
-var box2Geometry = new THREE.BoxGeometry(0.3, 1, 0.3);
-var box2Material = new THREE.MeshBasicMaterial({
-    color: 0xff0000
-});
-var box2 = new THREE.Mesh(box2Geometry, box2Material);
-var box2Obj = new THREE.Object3D();
-box2Obj.add(box2);
+
 
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
@@ -92,7 +86,7 @@ var stadshuset = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, 23.13);                    //(17.920747, 59.374212, 11.97);
+var tramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59.351258, 23.13);                    //(17.920747, 59.374212, 11.97);
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -105,7 +99,7 @@ var graffitiTram = new THREE.Object3D();
 var graffitiMaskingPlane = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
-var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, 23.13);            //(17.920747, 59.374212, 11.97);
+var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.071775, 59.351258, 23.13);            //(17.920747, 59.374212, 11.97);
 var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -116,7 +110,7 @@ var schedule = new THREE.Object3D();
 var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
 loadSchedule();
-var scheduleGeoPos = Cartesian3.fromDegrees(18.071775, 59351258, 23.13);                     //(17.920747, 59.374212, 11.97);
+var scheduleGeoPos = Cartesian3.fromDegrees(18.071775, 59.351258, 23.13);                     //(17.920747, 59.374212, 11.97);
 var scheduleGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -193,9 +187,10 @@ app.updateEvent.addEventListener(function (frame) {
         objPose = graffitiTramScene.getWorldPosition();
         
         if(!isObjInit) {
+            var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
             graffitiTramScene.position.copy(userPose.position);
-            //graffitiTramScene.quaternion.copy(userPose.orientation);
-            graffitiTramScene.rotation.y = userPose.rotation.y;
+            graffitiTramScene.quaternion.copy(tramScenePos.orientation);
+            //graffitiTramScene.rotation.y = userPose.rotation.y;
             graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             isObjInit = true;
         }
@@ -222,12 +217,8 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
-                scene.add(box2Obj);
                 box1Obj.position.copy(graffitiTramScene.position);
-                box2Obj.position.copy(graffitiTramScene.position);
-                box2Obj.position.z = box2Obj.position.z - 0.5;
-                box2Obj.position.x = box2Obj.position.x + 1.5;
-                box2Obj.position.y = box2Obj.position.y + 0.5;
+                box1Obj.position.x = box2Obj.position.x - 1.5;
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
