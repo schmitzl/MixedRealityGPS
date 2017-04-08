@@ -189,7 +189,7 @@ app.updateEvent.addEventListener(function (frame) {
         if(!isObjInit) {
             var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
             graffitiTramScene.position.copy(tramScenePos.position);
-            graffitiTramScene.quaternion.copy(tramScenePos.orientation);
+            graffitiTramScene.rotation.copy(tramScenePos.rotation);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
             //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             graffitiTramScene.position.y = userPose.position.y;
@@ -431,7 +431,7 @@ app.updateEvent.addEventListener(function (frame) {
             var camDir = camera.getWorldDirection();
             //camera.updateMatrixWorld();
             //    var cameraPos = userLocation.position;
-            posData = posData + graffitiTramScene.position.x + " " + graffitiTramScene.position.y + " " + graffitiTramScene.position.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+            posData = posData + objPose.x + " " + objPose.y + " " + objPose.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
         recordingStep++;
     }
