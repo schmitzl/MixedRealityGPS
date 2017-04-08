@@ -118,3 +118,19 @@ h2 {
     margin-left: 5px;
     line-height: 70px;
 }
+
+.redBox {
+    position: fixed;
+    width: 20px;
+    height: 80px;
+}
+
+#redBox1 {
+    margin-left: 2px;
+    margin-bottom: 5px;
+}
+
+#redBox2 {
+    margin-bottom: 50px;
+    margin-right: 2px;
+}

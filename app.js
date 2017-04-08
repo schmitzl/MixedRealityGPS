@@ -61,16 +61,6 @@ var arrow = document.getElementById('arrow');
 arrowContainer.add(arrow);
 hudContent.add(arrowContainer);*/
 
-// -- CREATE BOXES --
-var box1Geometry = new THREE.BoxGeometry(0.3, 1, 0.3);
-var box1Material = new THREE.MeshBasicMaterial({
-    color: 0xff0000
-});
-var box1 = new THREE.Mesh(box1Geometry, box1Material);
-var box1Obj = new THREE.Object3D();
-box1Obj.add(box1);
-
-
 
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
@@ -104,7 +94,7 @@ var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-graffitiTramScene.scale.set(0.5, 0.5, 0.5);
+graffitiTramScene.scale.set(0.3, 0.3, 0.3);
 //scene.add(graffitiTramScene);
 
 var schedule = new THREE.Object3D();
@@ -217,9 +207,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                scene.add(box1Obj);
-                box1Obj.position.copy(graffitiTramScene.position);
-                box1Obj.position.x = box1Obj.position.x - 1;
+                
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
@@ -232,7 +220,6 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-timeportal-find").style.display = "inline";
                 document.getElementById("arrow").style.display = "block";
                 isTakingScreenshot = false;
-                scene.remove(box1Obj);
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
@@ -270,13 +257,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                scene.add(box1Obj);
-                scene.add(box2Obj);
-                box1Obj.position.copy(tramScene.position);
-                box2Obj.position.copy(tramScene.position);
-                box2Obj.position.z = box2Obj.position.z - 0.5;
-                box2Obj.position.x = box2Obj.position.x + 1.5;
-                box2Obj.position.y = box2Obj.position.y + 0.5;
+               
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
@@ -291,8 +272,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Find the object";
                 document.getElementById("instructions-schedule-find").style.display = "inline";
                 isTakingScreenshot = false;
-                scene.remove(box1Obj);
-                scene.remove(box2Obj);
+                
                 scene.remove(tramScene);
                 isSearching = true;
                 document.getElementById("arrow").style.display = "block";
@@ -327,11 +307,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
                 scene.add(box1Obj);
                 scene.add(box2Obj);
-                box1Obj.position.copy(schedule.position);
-                box2Obj.position.copy(schedule.position);
-                box2Obj.position.z = box2Obj.position.z - 0.5;
-                box2Obj.position.x = box2Obj.position.x + 1.5;
-                box2Obj.position.y = box2Obj.position.y + 0.5;
+             
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
@@ -342,8 +318,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("doneBtn").style.display = "none";
                 document.getElementById("heading").innerHTML = "You are finished";
                 isTakingScreenshot = false;
-                scene.remove(box1Obj);
-                scene.remove(box2Obj);
+               
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
