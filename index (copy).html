@@ -1,0 +1,78 @@
+<html>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <head>
+    <title>Geo</title>
+    <script src="resources/lib/three/three.min.js"></script>
+    <script src="resources/lib/CSS3DArgonRenderer.js"></script>
+    <script src="resources/lib/CSS3DArgonHUD.js"></script>
+    <script src="resources/lib/argon.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="argon">
+      
+     <div id="arrowContainer"><img id="arrow" src="resources/arrow.png"/></div>
+
+	 <div id="description">
+        <img id="thumb" src="resources/imgs/graffiti_thumb.jpg"/>
+        <h2 id="heading">find the marker1</h2>
+       <!-- <button id="doneBtn" onclick="btnClicked()">Done!</button> -->
+      </div>
+     <!--   <div id="slider">
+            <input type="range" id="graffiti-slider" value="-370" min="-370" max="400">
+            <input type="range" id="timeportal-slider" value="0" min="0" max="700">
+            <input type="range" id="schedule-slider" value="0" min="0" max="360">
+        </div>-->
+        
+         <div class="instructions" id="instructions-graffiti-find">
+            <img class="instructions-pic" src="resources/imgs/findGraffitiObj.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+     <!--   <div class="instructions" id="instructions-timeportal-find">
+            <img class="instructions-pic" src="resources/imgs/findTimeportalObj.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        <div class="instructions" id="instructions-schedule-find">
+            <img class="instructions-pic" src="resources/imgs/findScheduleObj.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        
+         <div class="instructions" id="instructions-graffiti-move">
+            <img class="instructions-pic" src="resources/imgs/graffitiMove.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        <div class="instructions" id="instructions-timeportal-move">
+            <img class="instructions-pic" src="resources/imgs/tramSceneMove1.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        <div class="instructions" id="instructions-schedule-move">
+            <img class="instructions-pic" src="resources/imgs/tramSceneMove2.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        
+        <div class="instructions" id="instructions-graffiti-screenshot">
+            <img class="instructions-pic" src="resources/imgs/graffitiScreenshot.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        <div class="instructions" id="instructions-timeportal-screenshot">
+            <img class="instructions-pic" src="resources/imgs/tramSceneScreenshot.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div>
+        <div class="instructions" id="instructions-schedule-screenshot">
+            <img class="instructions-pic" src="resources/imgs/scheduleScreenshot.png"/>
+            <button class="gotItBtn" onclick="hideParent(this)">Got it!</button>
+        </div> -->
+      </div>
+      
+  </body>
+   <script>
+		function hideParent(elem) {
+            document.getElementById("heading").innerHTML = "click";
+		    //elem.parentElement.style.display = 'none';
+            //document.getElementById("doneBtn").style.display = "inline";
+            //document.getElementById("arrowContainer").style.display = "block";
+		}	
+	</script>
+ 
+	<!--<script src="./app.js"></script>-->
+</html>
