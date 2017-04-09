@@ -156,7 +156,6 @@ var recordingStep = 0;
 
 var isObjInit = false;
 
-scene.add(graffitiTramScene);
 scene.add(schedule);
 scene.add(tramScene);
 
@@ -175,18 +174,20 @@ app.updateEvent.addEventListener(function (frame) {
     
     if (step == graffiti_step) {
 
+        scene.add(graffitiTramScene);
+        
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
 
         objPose = graffitiTramScene.getWorldPosition();
         
-      //  if(!isObjInit) {
+        if(!isObjInit) {
             var tramScenePos = //app.context.getEntityPose(tramSceneGeoEntity);
             graffitiTramScene.position.copy(graffitiScenePos.position);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
             //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             graffitiTramScene.position.y = userPose.position.y;
             isObjInit = true;
-      //  }
+        }
 
         if (isSearching) {
             if (isBtnClicked) {
@@ -207,10 +208,11 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("slider").style.display = "none";
                 document.getElementById("graffiti-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
-                document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
-                isTakingScreenshot = true;
                 document.getElementById("redBox1").style.display = "inline";
                 document.getElementById("redBox2").style.display = "inline";
+                document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
+                isTakingScreenshot = true;
+                
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
