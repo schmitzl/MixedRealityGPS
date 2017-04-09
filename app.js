@@ -157,6 +157,8 @@ var recordingStep = 0;
 var isObjInit = false;
 
 scene.add(graffitiTramScene);
+scene.add(schedule);
+scene.add(tramScene);
 
 app.updateEvent.addEventListener(function (frame) {
 
@@ -177,14 +179,14 @@ app.updateEvent.addEventListener(function (frame) {
 
         objPose = graffitiTramScene.getWorldPosition();
         
-        if(!isObjInit) {
-            var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
-            graffitiTramScene.position.copy(tramScenePos.position);
+      //  if(!isObjInit) {
+            var tramScenePos = //app.context.getEntityPose(tramSceneGeoEntity);
+            graffitiTramScene.position.copy(graffitiScenePos.position);
             //graffitiTramScene.rotation.y = userPose.rotation.y;
             //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
             graffitiTramScene.position.y = userPose.position.y;
             isObjInit = true;
-        }
+      //  }
 
         if (isSearching) {
             if (isBtnClicked) {
@@ -235,8 +237,9 @@ app.updateEvent.addEventListener(function (frame) {
 
     }  else if (step == portal_step) {
 
+        var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+        
         if(!isObjInit) {
-            var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
             tramScene.position.copy(tramScenePos.position);
             //tramScene.quaternion.copy(tramScenePos.orientation);
             tramScene.position.y = userPose.y;
