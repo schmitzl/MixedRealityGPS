@@ -254,7 +254,7 @@ app.updateEvent.addEventListener(function (frame) {
         
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
-        tramScene.position.y = userPose.position.y - 2;
+        tramScene.position.y = userPose.position.y - 3;
 
         objPose = tramScene.getWorldPosition();
 
@@ -322,7 +322,7 @@ app.updateEvent.addEventListener(function (frame) {
         var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
 
         schedule.position.copy(schedulePos.position);
-        schedule.position.y = userPose.position.y - 5;
+        schedule.position.y = userPose.position.y - 6;
         
         objPose = schedule.getWorldPosition();
 
