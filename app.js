@@ -155,6 +155,7 @@ var isRecordingPose = false;
 var recordingStep = 0;
 
 var isObjInit = false;
+var timeRange = "";
 
 //scene.add(schedule);
 //scene.add(tramScene);
@@ -174,20 +175,16 @@ app.updateEvent.addEventListener(function (frame) {
     
     if (step == graffiti_step) {
 
-        scene.add(graffitiTramScene);
-        
-        var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
-
-        objPose = graffitiTramScene.getWorldPosition();
-        
         if(!isObjInit) {
-            var tramScenePos = //app.context.getEntityPose(tramSceneGeoEntity);
-            graffitiTramScene.position.copy(graffitiScenePos.position);
-            //graffitiTramScene.rotation.y = userPose.rotation.y;
-            //graffitiTramScene.position.x = graffitiTramScene.position.x + 2;
-            graffitiTramScene.position.y = userPose.position.y;
+            scene.add(graffitiTramScene);
             isObjInit = true;
         }
+        
+        var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
+        graffitiTramScene.position.copy(graffitiScenePos.position);
+        graffitiTramScene.position.y = userPose.position.y;
+        
+        objPose = graffitiTramScene.getWorldPosition();
 
         if (isSearching) {
             if (isBtnClicked) {
@@ -200,9 +197,14 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("graffiti-slider").style.display = "inline";
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Move the tram";
+                timeRange = "Time Start Placing " + new Date().getTime();
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
+                timeRange = "Time Stop Placing " + new Date().getTime();
+                sendData(timeRange);
+                timeRange = "";
+                
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
