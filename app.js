@@ -155,7 +155,8 @@ var isRecordingPose = false;
 var recordingStep = 0;
 
 var isObjInit = false;
-var timeRange = "";
+var timePassed = "";
+var start, end;
 
 //scene.add(schedule);
 //scene.add(tramScene);
@@ -197,11 +198,12 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("graffiti-slider").style.display = "inline";
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Move the tram";
-                timeRange = "Time Start Placing " + new Date().getTime();
+                start = +new Date();
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
-                timeRange = "Time Stop Placing " + new Date().getTime();
+                end = +new Date();
+                timeRange = "Time for Placing " + ( end - start);
                 sendData(timeRange);
                 timeRange = "";
                 
@@ -211,7 +213,6 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("graffiti-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("redBox1").style.display = "inline";
-                document.getElementById("redBox2").style.display = "inline";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
                 
@@ -220,7 +221,6 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 document.getElementById("redBox1").style.display = "none";
-                document.getElementById("redBox2").style.display = "none";
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
@@ -241,14 +241,14 @@ app.updateEvent.addEventListener(function (frame) {
 
     }  else if (step == portal_step) {
 
-        var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
-        
         if(!isObjInit) {
-            tramScene.position.copy(tramScenePos.position);
-            //tramScene.quaternion.copy(tramScenePos.orientation);
-            tramScene.position.y = userPose.y;
+            scene.add(tramScene);
             isObjInit = true;
         }
+        
+        var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+        tramScene.position.copy(tramScenePos.position);
+        tramScene.position.y = userPose.y;
 
         objPose = tramScene.getWorldPosition();
 
@@ -275,13 +275,11 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
                 document.getElementById("redBox1").style.display = "inline";
-                document.getElementById("redBox2").style.display = "inline";
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 document.getElementById("redBox1").style.display = "none";
-                document.getElementById("redBox2").style.display = "none";
                 isRecordingPose = false;
                 sendData(posData);
                 posData = "";
@@ -303,13 +301,15 @@ app.updateEvent.addEventListener(function (frame) {
     } else {
 
         if(!isObjInit) {
-            var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
-
-            schedule.position.copy(schedulePos.position);
-            schedule.position.y = userPose.y;
+            scene.add(schedule);
             isObjInit = true;
         }
+        
+        var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
 
+        schedule.position.copy(schedulePos.position);
+        schedule.position.y = userPose.y;
+        
         objPose = schedule.getWorldPosition();
 
         if (isSearching) {
@@ -334,14 +334,12 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
                 document.getElementById("redBox1").style.display = "inline";
-                document.getElementById("redBox2").style.display = "inline";
              
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 document.getElementById("redBox1").style.display = "none";
-                document.getElementById("redBox2").style.display = "none";
                 isBtnClicked = false;
                 step++;
                 scene.remove(schedule);
