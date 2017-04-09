@@ -81,7 +81,6 @@ var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-tramScene.scale.set(0.3, 0.3, 0.3);
 //scene.add(tramScene);
 
 var graffitiTramScene = new THREE.Object3D();
@@ -184,7 +183,7 @@ app.updateEvent.addEventListener(function (frame) {
         
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
         graffitiTramScene.position.copy(graffitiScenePos.position);
-        graffitiTramScene.position.y = userPose.position.y;
+        graffitiTramScene.position.y = userPose.position.y - 1.7;
         
         objPose = graffitiTramScene.getWorldPosition();
 
@@ -333,7 +332,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
                 document.getElementById("instructions-schedule-move").style.display = "inline";
-                document.getElementById("graffiti-slider").style.display = "inline";
+                document.getElementById("schedule-slider").style.display = "inline";
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Rotate to Line 5";
                 start = +new Date();
@@ -346,7 +345,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
-                document.getElementById("graffiti-slider").style.display = "none";
+                document.getElementById("schedule-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
