@@ -295,10 +295,13 @@ app.updateEvent.addEventListener(function (frame) {
         }
     } else {
 
-        var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
-        schedule.position.copy(schedulePos.position);
-        schedule.position.z = userPose.z;
-        schedule.quaternion.copy(schedulePos.orientation);
+        if(!isObjInit) {
+            var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
+
+            schedule.position.copy(schedulePos.position);
+            schedule.position.y = userPose.y;
+            isObjInit = true;
+        }
 
         objPose = schedule.getWorldPosition();
 
@@ -310,22 +313,28 @@ app.updateEvent.addEventListener(function (frame) {
                 isPlacing = true;
                 document.getElementById("arrow").style.display = "none";
                 document.getElementById("instructions-schedule-move").style.display = "inline";
+                document.getElementById("graffiti-slider").style.display = "inline";
+                document.getElementById("slider").style.display = "inline";
+                document.getElementById("heading").innerHTML = "Rotate to Line 5";
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
+                document.getElementById("graffiti-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                scene.add(box1Obj);
-                scene.add(box2Obj);
+                document.getElementById("redBox1").style.display = "inline";
+                document.getElementById("redBox2").style.display = "inline";
              
                 isRecordingPose = true;
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
+                document.getElementById("redBox1").style.display = "none";
+                document.getElementById("redBox2").style.display = "none";
                 isBtnClicked = false;
                 step++;
                 scene.remove(schedule);
