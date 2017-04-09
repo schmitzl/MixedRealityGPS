@@ -81,7 +81,7 @@ var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-tramScene.scale(0.3, 0.3, 0.3);
+tramScene.scale.set(0.3, 0.3, 0.3);
 //scene.add(tramScene);
 
 var graffitiTramScene = new THREE.Object3D();
