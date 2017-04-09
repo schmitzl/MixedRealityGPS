@@ -156,8 +156,8 @@ var recordingStep = 0;
 
 var isObjInit = false;
 
-scene.add(schedule);
-scene.add(tramScene);
+//scene.add(schedule);
+//scene.add(tramScene);
 
 app.updateEvent.addEventListener(function (frame) {
 
