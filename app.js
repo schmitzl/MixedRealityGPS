@@ -310,6 +310,10 @@ app.updateEvent.addEventListener(function (frame) {
 
                 camera.add(box1Obj);
                 box1Obj.position.z = -3;
+                box1Obj.position.x = -1;
+                box1Obj.rotateY(0, 174533);
+                box1Obj.rotateX(0, 174533);
+
 
                 isRecordingPose = true;
                 start = +new Date();
