@@ -76,7 +76,7 @@ var stadshuset = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13);                    //(17.920747, 59.374212, 11.97);
+var tramSceneGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13); //(17.920747, 59.374212, 11.97);
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -90,7 +90,7 @@ var graffitiTram = new THREE.Object3D();
 var graffitiMaskingPlane = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
-var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13);            //(17.920747, 59.374212, 11.97);
+var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13); //(17.920747, 59.374212, 11.97);
 var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -102,7 +102,7 @@ var schedule = new THREE.Object3D();
 var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
 loadSchedule();
-var scheduleGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13);                     //(17.920747, 59.374212, 11.97);
+var scheduleGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13); //(17.920747, 59.374212, 11.97);
 var scheduleGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -166,7 +166,7 @@ var start, end;
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
-    
+
     var userPose = app.context.getEntityPose(app.context.user);
 
     if (userPose.poseStatus & Argon.PoseStatus.KNOWN) {
@@ -175,18 +175,18 @@ app.updateEvent.addEventListener(function (frame) {
 
         return;
     }
-    
+
     if (step == graffiti_step) {
 
-        if(!isObjInit) {
+        if (!isObjInit) {
             scene.add(graffitiTramScene);
             isObjInit = true;
         }
-        
+
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
         graffitiTramScene.position.copy(graffitiScenePos.position);
         graffitiTramScene.position.y = userPose.position.y;
-        
+
         objPose = graffitiTramScene.getWorldPosition();
 
         if (isSearching) {
@@ -205,9 +205,9 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Placing " + ( end - start);
+                timePassed = "Time for Placing " + (end - start);
                 sendData(timePassed);
-                
+
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
@@ -216,19 +216,19 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("redBox1").style.display = "inline";
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                
+
                 isRecordingPose = true;
                 start = +new Date();
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Taking Screenshot " + ( end - start);
+                timePassed = "Time for Taking Screenshot " + (end - start);
                 isRecordingPose = false;
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-                
+
                 document.getElementById("redBox1").style.display = "none";
                 isBtnClicked = false;
                 step++;
@@ -245,13 +245,13 @@ app.updateEvent.addEventListener(function (frame) {
             }
         }
 
-    }  else if (step == portal_step) {
+    } else if (step == portal_step) {
 
-        if(!isObjInit) {
+        if (!isObjInit) {
             scene.add(tramScene);
             isObjInit = true;
         }
-        
+
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
         tramScene.position.copy(tramScenePos.position);
         tramScene.position.y = userPose.position.y - 3;
@@ -275,7 +275,7 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Placing " + ( end - start);
+                timePassed = "Time for Placing " + (end - start);
                 sendData(timePassed);
                 isBtnClicked = false;
                 isPlacing = false;
@@ -291,7 +291,7 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Taking Screenshot " + ( end - start);
+                timePassed = "Time for Taking Screenshot " + (end - start);
                 isRecordingPose = false;
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
@@ -304,7 +304,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Find the object";
                 document.getElementById("instructions-schedule-find").style.display = "inline";
                 isTakingScreenshot = false;
-                
+
                 scene.remove(tramScene);
                 isSearching = true;
                 document.getElementById("arrow").style.display = "block";
@@ -314,16 +314,16 @@ app.updateEvent.addEventListener(function (frame) {
         }
     } else {
 
-        if(!isObjInit) {
+        if (!isObjInit) {
             scene.add(schedule);
             isObjInit = true;
         }
-        
+
         var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
 
         schedule.position.copy(schedulePos.position);
         schedule.position.y = userPose.position.y - 10;
-        
+
         objPose = schedule.getWorldPosition();
 
         if (isSearching) {
@@ -342,7 +342,7 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Placing " + ( end - start);
+                timePassed = "Time for Placing " + (end - start);
                 sendData(timePassed);
                 isBtnClicked = false;
                 isPlacing = false;
@@ -352,19 +352,19 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
                 document.getElementById("redBox1").style.display = "inline";
-             
+
                 isRecordingPose = true;
                 start = +new Date();
             }
         } else if (isTakingScreenshot) {
             if (isBtnClicked) {
                 end = +new Date();
-                timePassed = "Time for Taking Screenshot " + ( end - start);
+                timePassed = "Time for Taking Screenshot " + (end - start);
                 isRecordingPose = false;
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-                
+
                 document.getElementById("redBox1").style.display = "none";
                 isBtnClicked = false;
                 step++;
@@ -374,7 +374,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = false;
 
             }
-        } 
+        }
     }
 
     var graffitiStepVal = document.getElementById('graffiti-slider').value;
@@ -433,7 +433,7 @@ app.updateEvent.addEventListener(function (frame) {
 
     // udpate our scene matrices
     scene.updateMatrixWorld();
-    
+
     var camDirection = camera.getWorldDirection();
     camera.updateMatrixWorld();
     var a = camera.position.clone();
@@ -456,8 +456,8 @@ app.updateEvent.addEventListener(function (frame) {
         if (recordingStep >= 60) {
             var camDir = camera.getWorldDirection();
             //camera.updateMatrixWorld();
-            //    var cameraPos = userLocation.position;
-            posData = posData + objPose.x + " " + objPose.y + " " + objPose.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+            var cameraPos = userLocation.getWorldPosition();
+            posData = posData + cameraPos.x + " " + cameraPos.y + " " + cameraPos.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
         recordingStep++;
     }
@@ -494,7 +494,7 @@ app.renderEvent.addEventListener(function () {
     var viewport = app.view.getViewport();
     renderer.setSize(viewport.width, viewport.height);
     cssRenderer.setSize(viewport.width, viewport.height);
-   // hud.setSize(viewport.width, viewport.height);
+    // hud.setSize(viewport.width, viewport.height);
 
     for (var _i = 0, _a = app.view.getSubviews(); _i < _a.length; _i++) {
         var subview = _a[_i];
@@ -520,8 +520,8 @@ app.renderEvent.addEventListener(function () {
         renderer.setScissorTest(true);
         renderer.render(scene, camera);
 
-       // hud.setViewport(x, y, width, height, subview.index);
-    //    hud.render(subview.index);
+        // hud.setViewport(x, y, width, height, subview.index);
+        //    hud.render(subview.index);
     }
 });
 
