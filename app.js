@@ -226,10 +226,10 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("graffiti-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 //document.getElementById("redBox1").style.display = "inline";
-                box1Obj.position.copy(userPose.position);
-                box1Obj.quaternion.copy(userPose.orientation);
-                box1Obj.position.z = box1Obj.position.z + 3;
+
                 camera.add(box1Obj);
+                box1Obj.position.z = -3;
+
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
 
@@ -238,7 +238,7 @@ app.updateEvent.addEventListener(function (frame) {
             }
         } else if (isTakingScreenshot) {
 
-            box1Obj.position.z = -3;
+
 
             if (isBtnClicked) {
                 end = +new Date();
@@ -248,7 +248,8 @@ app.updateEvent.addEventListener(function (frame) {
                 sendData(posData);
                 posData = "";
 
-                document.getElementById("redBox1").style.display = "none";
+                camera.remove(box1Obj);
+
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
@@ -306,7 +307,10 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                document.getElementById("redBox1").style.display = "inline";
+
+                camera.add(box1Obj);
+                box1Obj.position.z = -3;
+
                 isRecordingPose = true;
                 start = +new Date();
             }
@@ -318,7 +322,9 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-                document.getElementById("redBox1").style.display = "none";
+
+                camera.remove(box1Obj);
+
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/tram_thumb.jpg";
@@ -376,7 +382,9 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
-                document.getElementById("redBox1").style.display = "inline";
+
+                camera.add(box1Obj);
+                box1Obj.position.z = -3;
 
                 isRecordingPose = true;
                 start = +new Date();
@@ -390,7 +398,8 @@ app.updateEvent.addEventListener(function (frame) {
                 sendData(posData);
                 posData = "";
 
-                document.getElementById("redBox1").style.display = "none";
+                camera.remove(box1Obj);
+
                 isBtnClicked = false;
                 step++;
                 scene.remove(schedule);
