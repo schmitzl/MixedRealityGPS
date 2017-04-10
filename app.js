@@ -229,7 +229,7 @@ app.updateEvent.addEventListener(function (frame) {
                 box1Obj.position.copy(userPose.position);
                 box1Obj.quaternion.copy(userPose.orientation);
                 box1Obj.position.z = box1Obj.position.z + 3;
-                scene.add(box1Obj);
+                camera.add(box1Obj);
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
 
@@ -238,9 +238,7 @@ app.updateEvent.addEventListener(function (frame) {
             }
         } else if (isTakingScreenshot) {
 
-            box1Obj.position.copy(userPose.position);
-            box1Obj.quaternion.copy(camera.orientation);
-            box1Obj.position.z = box1Obj.position.z + 3;
+            box1Obj.position.z = -3;
 
             if (isBtnClicked) {
                 end = +new Date();
