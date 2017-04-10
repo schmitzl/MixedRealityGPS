@@ -239,7 +239,7 @@ app.updateEvent.addEventListener(function (frame) {
         } else if (isTakingScreenshot) {
 
             box1Obj.position.copy(userPose.position);
-            box1Obj.quaternion.copy(userPose.orientation);
+            box1Obj.quaternion.copy(camera.orientation);
             box1Obj.position.z = box1Obj.position.z + 3;
 
             if (isBtnClicked) {
