@@ -172,6 +172,11 @@ var start, end;
 //scene.add(schedule);
 //scene.add(tramScene);
 
+box1Obj.position.z = -2;
+box1Obj.position.x = -0.5;
+box1Obj.rotateY(0, -174533);
+box1Obj.rotateX(0, 174533);
+
 app.updateEvent.addEventListener(function (frame) {
 
     var objPose;
@@ -228,10 +233,7 @@ app.updateEvent.addEventListener(function (frame) {
                 //document.getElementById("redBox1").style.display = "inline";
 
                 camera.add(box1Obj);
-                box1Obj.position.z = -3;
-                box1Obj.position.x = -1;
-                box1Obj.rotateY(0, 174533);
-                box1Obj.rotateX(0, 174533);
+
 
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
@@ -312,10 +314,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
 
                 camera.add(box1Obj);
-                box1Obj.position.z = -3;
-                box1Obj.position.x = -1;
-                box1Obj.rotateY(0, 174533);
-                box1Obj.rotateX(0, 174533);
+
 
 
                 isRecordingPose = true;
@@ -391,10 +390,7 @@ app.updateEvent.addEventListener(function (frame) {
                 isTakingScreenshot = true;
 
                 camera.add(box1Obj);
-                box1Obj.position.z = -3;
-                box1Obj.position.x = -1;
-                box1Obj.rotateY(0, 174533);
-                box1Obj.rotateX(0, 174533);
+
 
                 isRecordingPose = true;
                 start = +new Date();
