@@ -62,6 +62,15 @@ arrowContainer.add(arrow);
 hudContent.add(arrowContainer);*/
 
 
+// -- CREATE BOXES --
+var box1Geometry = new THREE.BoxGeometry(0.3, 1, 0.3);
+var box1Material = new THREE.MeshBasicMaterial({
+    color: 0xff0000
+});
+var box1 = new THREE.Mesh(box1Geometry, box1Material);
+var box1Obj = new THREE.Object3D();
+box1Obj.add(box1);
+
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
 var tramBase = new THREE.Object3D();
@@ -201,19 +210,26 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Move the tram";
                 start = +new Date();
+                isRecordingPose = true;
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
                 timePassed = "Time for Placing " + (end - start);
-                sendData(timePassed);
+                posData = timePassed + "\n" + posData;
+                sendData(posData);
+                posData = "";
 
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
                 document.getElementById("graffiti-slider").style.display = "none";
                 document.getElementById("heading").innerHTML = "Take a screenshot";
-                document.getElementById("redBox1").style.display = "inline";
+                //document.getElementById("redBox1").style.display = "inline";
+                box1Obj.position.copy(userPose.position);
+                box1Obj.orientation.copy(userPose.orientation);
+                box1Obj.position.z = box1Obj.position.z + 3;
+                scene.add(box1Obj);
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
 
@@ -271,12 +287,15 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Move the tram";
                 start = +new Date();
+                isRecordingPose = true;
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
                 timePassed = "Time for Placing " + (end - start);
-                sendData(timePassed);
+                posData = timePassed + "\n" + posData;
+                sendData(posData);
+                posData = "";
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
@@ -338,12 +357,15 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("slider").style.display = "inline";
                 document.getElementById("heading").innerHTML = "Rotate to Line 5";
                 start = +new Date();
+                isRecordingPose = true;
             }
         } else if (isPlacing) {
             if (isBtnClicked) {
                 end = +new Date();
                 timePassed = "Time for Placing " + (end - start);
-                sendData(timePassed);
+                posData = timePassed + "\n" + posData;
+                sendData(posData);
+                posData = "";
                 isBtnClicked = false;
                 isPlacing = false;
                 document.getElementById("slider").style.display = "none";
@@ -457,7 +479,7 @@ app.updateEvent.addEventListener(function (frame) {
             var camDir = camera.getWorldDirection();
             //camera.updateMatrixWorld();
             var cameraPos = userLocation.getWorldPosition();
-            posData = posData + cameraPos.x + " " + cameraPos.y + " " + cameraPos.z + ", " + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
+            posData = posData + camDir.x + " " + camDir.y + " " + camDir.z + "\n";
         }
         recordingStep++;
     }
