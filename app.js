@@ -227,7 +227,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 //document.getElementById("redBox1").style.display = "inline";
                 box1Obj.position.copy(userPose.position);
-                box1Obj.orientation.copy(userPose.orientation);
+                box1Obj.quaternion.copy(userPose.orientation);
                 box1Obj.position.z = box1Obj.position.z + 3;
                 scene.add(box1Obj);
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
@@ -237,6 +237,11 @@ app.updateEvent.addEventListener(function (frame) {
                 start = +new Date();
             }
         } else if (isTakingScreenshot) {
+
+            box1Obj.position.copy(userPose.position);
+            box1Obj.quaternion.copy(userPose.orientation);
+            box1Obj.position.z = box1Obj.position.z + 3;
+
             if (isBtnClicked) {
                 end = +new Date();
                 timePassed = "Time for Taking Screenshot " + (end - start);
