@@ -195,7 +195,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(graffitiTramScene);
-            graffitiTramScene.lookAt(camera);
             isObjInit = true;
         }
 
@@ -206,6 +205,9 @@ app.updateEvent.addEventListener(function (frame) {
         objPose = graffitiTramScene.getWorldPosition();
 
         if (isSearching) {
+
+            graffitiTramScene.rotation.y = Math.atan2((camera.position.x - graffitiTramScene.position.x), (camera.position.z - graffitiTramScene.position.z));
+
             if (isBtnClicked) {
                 isBtnClicked = false;
                 isSearching = false;
@@ -272,7 +274,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(tramScene);
-            tramScene.lookAt(camera);
             isObjInit = true;
         }
 
@@ -344,7 +345,6 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(schedule);
-            schedule.lookAt(camera);
             isObjInit = true;
         }
 
