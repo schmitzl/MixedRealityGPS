@@ -195,6 +195,7 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(graffitiTramScene);
+            graffitiTramScene.lookAt(camera);
             isObjInit = true;
         }
 
@@ -271,6 +272,7 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(tramScene);
+            tramScene.lookAt(camera);
             isObjInit = true;
         }
 
@@ -342,6 +344,7 @@ app.updateEvent.addEventListener(function (frame) {
 
         if (!isObjInit) {
             scene.add(schedule);
+            schedule.lookAt(camera);
             isObjInit = true;
         }
 
