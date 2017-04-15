@@ -284,6 +284,9 @@ app.updateEvent.addEventListener(function (frame) {
         objPose = tramScene.getWorldPosition();
 
         if (isSearching) {
+
+            tramScene.rotation.y = Math.atan2((camera.position.x - tramScene.position.x), (camera.position.z - tramScene.position.z));
+
             if (isBtnClicked) {
                 isBtnClicked = false;
                 isSearching = false;
@@ -356,6 +359,9 @@ app.updateEvent.addEventListener(function (frame) {
         objPose = schedule.getWorldPosition();
 
         if (isSearching) {
+
+            schedule.rotation.y = Math.atan2((camera.position.x - schedule.position.x), (camera.position.z - schedule.position.z));
+
             if (isBtnClicked) {
                 isSearching = false;
                 isBtnClicked = false;
