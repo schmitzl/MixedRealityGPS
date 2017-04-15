@@ -71,6 +71,8 @@ var box1 = new THREE.Mesh(box1Geometry, box1Material);
 var box1Obj = new THREE.Object3D();
 box1Obj.add(box1);
 
+
+
 // -- LOAD SCENES --
 var tramScene = new THREE.Object3D();
 var tramBase = new THREE.Object3D();
@@ -82,6 +84,7 @@ var canvas = new THREE.Object3D();
 var sky = new THREE.Object3D();
 var ground = new THREE.Object3D();
 var stadshuset = new THREE.Object3D();
+var timeportalCube = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
@@ -97,6 +100,7 @@ var graffitiTramScene = new THREE.Object3D();
 var graffitiTramBg = new THREE.Object3D();
 var graffitiTram = new THREE.Object3D();
 var graffitiMaskingPlane = new THREE.Object3D();
+var graffitiCube = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
 var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13); //(17.920747, 59.374212, 11.97);
@@ -110,6 +114,7 @@ graffitiTramScene.scale.set(0.3, 0.3, 0.3);
 var schedule = new THREE.Object3D();
 var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
+var scheduleCube = new THREE.Object3D();
 loadSchedule();
 var scheduleGeoPos = Cartesian3.fromDegrees(18.072288, 59.346936, 23.13); //(17.920747, 59.374212, 11.97);
 var scheduleGeoEntity = new Argon.Cesium.Entity({
@@ -117,6 +122,7 @@ var scheduleGeoEntity = new Argon.Cesium.Entity({
     orientation: Cesium.Quaternion.IDENTITY
 });
 schedule.scale.set(2, 2, 2);
+schedule.translateY(-3);
 //scene.add(schedule);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
@@ -172,10 +178,7 @@ var start, end;
 //scene.add(schedule);
 //scene.add(tramScene);
 
-box1Obj.position.z = -2;
-box1Obj.position.x = -0.5;
-box1Obj.rotateY(0, -174533);
-box1Obj.rotateX(0, 174533);
+
 
 app.updateEvent.addEventListener(function (frame) {
 
@@ -232,8 +235,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("heading").innerHTML = "Take a screenshot";
                 //document.getElementById("redBox1").style.display = "inline";
 
-                camera.add(box1Obj);
-
+                graffitiTramScene.add(graffitiCube);
 
                 document.getElementById("instructions-graffiti-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
@@ -252,9 +254,6 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-
-                camera.remove(box1Obj);
-
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/portal_thumb.jpg";
@@ -313,9 +312,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-timeportal-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
 
-                camera.add(box1Obj);
-
-
+                tramScene.add(timeportalCube);
 
                 isRecordingPose = true;
                 start = +new Date();
@@ -328,9 +325,6 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-
-                camera.remove(box1Obj);
-
                 isBtnClicked = false;
                 step++;
                 document.getElementById("thumb").src = "resources/imgs/tram_thumb.jpg";
@@ -389,8 +383,7 @@ app.updateEvent.addEventListener(function (frame) {
                 document.getElementById("instructions-schedule-screenshot").style.display = "inline";
                 isTakingScreenshot = true;
 
-                camera.add(box1Obj);
-
+                schedule.add(scheduleCube);
 
                 isRecordingPose = true;
                 start = +new Date();
@@ -403,9 +396,6 @@ app.updateEvent.addEventListener(function (frame) {
                 posData = timePassed + "\n" + posData;
                 sendData(posData);
                 posData = "";
-
-                camera.remove(box1Obj);
-
                 isBtnClicked = false;
                 step++;
                 scene.remove(schedule);
@@ -687,6 +677,18 @@ function loadTramScene() {
         stadshusetMesh.scale.set(.4, .4, .4);
     });
 
+    var timeportalCubeMesh;
+    var timeportalCubeTextureLoader = new THREE.TextureLoader();
+    var timeportalCubeGeometry = new THREE.Geometry();
+    var timeportalCubeLoader = new THREE.JSONLoader();
+    timeportalCubeLoader.load('resources/obj/tram/timeportalCube.js', function (timeportalCubeGeometry) {
+        var timeportalCubeMaterial = new THREE.MeshPhongMaterial();
+        timeportalCubeMesh = new THREE.Mesh(timeportalCubeGeometry, timeportalCubeMaterial);
+        timeportalCubeMesh.material.color.set(0xFF0000);
+        timeportalCube.add(timeportalCubeMesh);
+        timeportalCubeMesh.scale.set(.4, .4, .4);
+    });
+
     tramScene.add(tramBase);
     tramScene.add(tramFrame);
     tramScene.add(platform);
@@ -743,6 +745,17 @@ function loadgraffitiScene() {
         graffitiMaskingPlane.add(maskingPlaneMesh);
     });
 
+    var graffitiCubeMesh;
+    var graffitiCubeTextureLoader = new THREE.TextureLoader();
+    var graffitiCubeGeometry = new THREE.Geometry();
+    var graffitiCubeLoader = new THREE.JSONLoader();
+    graffitiCubeLoader.load('resources/obj/tram/graffitiCube.js', function (graffitiCubeGeometry) {
+        var graffitiCubeMaterial = new THREE.MeshPhongMaterial();
+        graffitiCubeMesh = new THREE.Mesh(graffitiCubeGeometry, graffitiCubeMaterial);
+        graffitiCubeMesh.material.color.set(0xFF0000);
+        graffitiCube.add(graffitiCubeMesh);
+    });
+
     graffitiTramScene.add(graffitiTramBg);
     graffitiTramScene.add(graffitiTram);
     graffitiTramScene.add(graffitiMaskingPlane);
@@ -760,6 +773,7 @@ function loadSchedule() {
         });
         schedulePostMesh = new THREE.Mesh(schedulePostGeometry, schedulePostMaterial);
         schedulePost.add(schedulePostMesh);
+        schedulePost.scale.set(1.5, 2.0, 1.5);
     });
 
     var scheduleBoxMesh;
@@ -773,6 +787,18 @@ function loadSchedule() {
         });
         scheduleBoxMesh = new THREE.Mesh(scheduleBoxGeometry, scheduleBoxMaterial);
         scheduleBox.add(scheduleBoxMesh);
+        scheduleBox.scale.set(1.5, 1.5, 1.5);
+    });
+
+    var scheduleCubeMesh;
+    var scheduleCubeTextureLoader = new THREE.TextureLoader();
+    var scheduleCubeGeometry = new THREE.Geometry();
+    var scheduleCubeLoader = new THREE.JSONLoader();
+    scheduleCubeLoader.load('resources/obj/tram/scheduleCube.js', function (scheduleCubeGeometry) {
+        var scheduleCubeMaterial = new THREE.MeshPhongMaterial();
+        scheduleCubeMesh = new THREE.Mesh(scheduleCubeGeometry, scheduleCubeMaterial);
+        scheduleCubeMesh.material.color.set(0xFF0000);
+        scheduleCube.add(scheduleCubeMesh);
     });
 
     schedule.add(schedulePost);
