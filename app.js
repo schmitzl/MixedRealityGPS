@@ -93,7 +93,6 @@ var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-tramScene.scale.set(2.2, 2.2, 2.2);
 //scene.add(tramScene);
 
 var graffitiTramScene = new THREE.Object3D();
@@ -121,8 +120,7 @@ var scheduleGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
 });
-schedule.scale.set(2, 2, 2);
-schedule.translateY(-3);
+schedule.translateY(-8);
 //scene.add(schedule);
 
 //var llaBox = new Cesium.Cartographic(CesiumMath.toRadians(18.071689), CesiumMath.toRadians(59.351256), 29.25);
