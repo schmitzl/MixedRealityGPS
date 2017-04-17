@@ -173,6 +173,8 @@ var isObjInit = false;
 var timePassed = "";
 var start, end;
 
+var isUsingUserPose = true;
+
 //scene.add(schedule);
 //scene.add(tramScene);
 
@@ -199,7 +201,14 @@ app.updateEvent.addEventListener(function (frame) {
         }
 
         var graffitiScenePos = app.context.getEntityPose(graffitiTramSceneGeoEntity);
-        graffitiTramScene.position.copy(graffitiScenePos.position);
+        if (isUsingUserPose) {
+            graffitiTramScene.position.copy(userPose.position);
+        } else {
+            graffitiTramScene.position.copy(graffitiScenePos.position);
+        }
+
+
+
         graffitiTramScene.position.y = userPose.position.y;
 
         objPose = graffitiTramScene.getWorldPosition();
@@ -278,6 +287,13 @@ app.updateEvent.addEventListener(function (frame) {
         }
 
         var tramScenePos = app.context.getEntityPose(tramSceneGeoEntity);
+
+        if (isUsingUserPose) {
+            tramScene.position.copy(userPose.position);
+        } else {
+            tramScene.position.copy(tramScenePos.position);
+        }
+
         tramScene.position.copy(tramScenePos.position);
         tramScene.position.y = userPose.position.y - 3;
 
@@ -353,7 +369,13 @@ app.updateEvent.addEventListener(function (frame) {
 
         var schedulePos = app.context.getEntityPose(scheduleGeoEntity);
 
-        schedule.position.copy(schedulePos.position);
+        if (isUsingUserPose) {
+            schedule.position.copy(userPose.position);
+        } else {
+            schedule.position.copy(schedulePos.position);
+        }
+
+
         schedule.position.y = userPose.position.y - 10;
 
         objPose = schedule.getWorldPosition();
