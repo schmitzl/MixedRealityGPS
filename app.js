@@ -193,7 +193,7 @@ app.updateEvent.addEventListener(function (frame) {
         return;
     }
 
-    var userStartPose;
+    var userStartPose = app.context.getEntityPose(app.context.user);
 
     if (step == graffiti_step) {
 
