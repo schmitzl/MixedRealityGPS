@@ -178,7 +178,7 @@ var isUsingUserPose = true;
 //scene.add(schedule);
 //scene.add(tramScene);
 
-
+var userStartPose = app.context.getEntityPose(app.context.user);
 
 app.updateEvent.addEventListener(function (frame) {
 
@@ -193,7 +193,7 @@ app.updateEvent.addEventListener(function (frame) {
         return;
     }
 
-    var userStartPose = app.context.getEntityPose(app.context.user);
+
 
     if (step == graffiti_step) {
 
