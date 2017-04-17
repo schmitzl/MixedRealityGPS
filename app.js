@@ -305,7 +305,7 @@ app.updateEvent.addEventListener(function (frame) {
         if (isSearching) {
 
             tramScene.rotation.y = Math.atan2((camera.position.x - tramScene.position.x), (camera.position.z - tramScene.position.z));
-            tramScene.rotation.y = Math.PI;
+            tramScene.rotation.y = 2 * Math.PI;
 
             if (isBtnClicked) {
                 isBtnClicked = false;
