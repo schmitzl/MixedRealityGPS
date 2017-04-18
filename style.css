@@ -138,9 +138,7 @@ h2 {
     display: none;
 }
 
-CSS Portal Home CSS Blog CSS Examples CSS Generators CSS Resources CSS Tools Style Input Range This is a handy generator that will help you style the html input range tag. You will be able to style all aspects of the input range tag and see the changes in the preview box below. Once you are happy with the style,
-simply copy and paste the generated css code into your project. If you need a bit of help to style of the input tag,
-just select from one of our preset designs to get you started. Style Input Range Preview Thumb Properties Thumb Thumb Border Track Properties Track Track Border CSS Code input[type=range] {
+input[type=range] {
     -webkit-appearance: none;
     margin: 10px 0;
     width: 100%;
@@ -156,7 +154,7 @@ input[type=range]::-webkit-slider-runnable-track {
     cursor: pointer;
     animate: 0.2s;
     box-shadow: 1px 1px 1px #000000;
-    background: #74A9D8;
+    background: #AAAAAA;
     border-radius: 1px;
     border: 0px solid #010101;
 }
@@ -174,7 +172,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #74A9D8;
+    background: #AAAAAA;
 }
 
 input[type=range]::-moz-range-track {
@@ -183,7 +181,7 @@ input[type=range]::-moz-range-track {
     cursor: pointer;
     animate: 0.2s;
     box-shadow: 1px 1px 1px #000000;
-    background: #74A9D8;
+    background: #AAAAAA;
     border-radius: 1px;
     border: 0px solid #010101;
 }
@@ -209,14 +207,14 @@ input[type=range]::-ms-track {
 }
 
 input[type=range]::-ms-fill-lower {
-    background: #74A9D8;
+    background: #AAAAAA;
     border: 0px solid #010101;
     border-radius: 2px;
     box-shadow: 1px 1px 1px #000000;
 }
 
 input[type=range]::-ms-fill-upper {
-    background: #74A9D8;
+    background: #AAAAAA;
     border: 0px solid #010101;
     border-radius: 2px;
     box-shadow: 1px 1px 1px #000000;
@@ -233,9 +231,9 @@ input[type=range]::-ms-thumb {
 }
 
 input[type=range]:focus::-ms-fill-lower {
-    background: #74A9D8;
+    background: #AAAAAA;
 }
 
 input[type=range]:focus::-ms-fill-upper {
-    background: #74A9D8;
+    background: #AAAAAA;
 }
