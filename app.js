@@ -88,7 +88,7 @@ var timeportalCube = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(18.071993, 59.35128, 22.89); //(17.920747, 59.374212, 11.97); 59.328261, 18.063627
+var tramSceneGeoPos = Cartesian3.fromDegrees(18.071899, 59.346962, 22.89); //(17.920747, 59.374212, 11.97); 59.328261, 18.063627
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -102,7 +102,7 @@ var graffitiMaskingPlane = new THREE.Object3D();
 var graffitiCube = new THREE.Object3D();
 loadgraffitiScene();
 graffitiTramScene.scale.set(0.25, 0.35, 0.25);
-var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.071993, 59.35128, 22.89); //(17.920747, 59.374212, 11.97);
+var graffitiTramSceneGeoPos = Cartesian3.fromDegrees(18.071899, 59.346962, 22.89); //(17.920747, 59.374212, 11.97);
 var graffitiTramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(graffitiTramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
@@ -115,7 +115,7 @@ var schedulePost = new THREE.Object3D();
 var scheduleBox = new THREE.Object3D();
 var scheduleCube = new THREE.Object3D();
 loadSchedule();
-var scheduleGeoPos = Cartesian3.fromDegrees(18.071993, 59.35128, 22.89); //(17.920747, 59.374212, 11.97);
+var scheduleGeoPos = Cartesian3.fromDegrees(18.071899, 59.346962, 22.89); //(17.920747, 59.374212, 11.97);
 var scheduleGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(scheduleGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
