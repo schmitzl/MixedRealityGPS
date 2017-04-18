@@ -1,13 +1,14 @@
 body {
-	font-family: Arial;
+    font-family: Arial;
 }
 
 a {
-	color: #ffffff;
+    color: #ffffff;
 }
 
 button {
-    background-color: #4CAF50; /* Green */
+    background-color: #4CAF50;
+    /* Green */
     border: none;
     color: white;
     padding: 7px 15px;
@@ -18,31 +19,29 @@ button {
     vertical-align: middle;
 }
 
-
 #description {
-  color: white;
-  pointer-events: auto;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  padding: 5px 10px 5px 10px;
-  background-color:rgba(0,0,0,0.76);
-  -webkit-backdrop-filter: blur(5px);
-  position:absolute;
-  top: 0px;
-  width: 100%;
-  z-index: 3;
+    color: white;
+    pointer-events: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 5px 10px 5px 10px;
+    background-color: rgba(0, 0, 0, 0.76);
+    -webkit-backdrop-filter: blur(5px);
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    z-index: 3;
 }
 
-
 #arrowContainer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 #arrow {
-	width: 80px;
-	display: block;
-	margin-left: auto;
+    width: 80px;
+    display: block;
+    margin-left: auto;
     margin-right: auto;
 }
 
@@ -52,7 +51,7 @@ button {
     display: inline;
     vertical-align: middle;
 }
-    
+
 #timeportal-slider {
     display: none;
 }
@@ -62,14 +61,14 @@ button {
 }
 
 #slider {
-     pointer-events: auto;
+    pointer-events: auto;
     position: absolute;
     color: white;
     bottom: 0;
     right: 0;
     left: 0;
     width: 100%;
-    background-color:rgba(0,0,0,0.76);
+    background-color: rgba(0, 0, 0, 0.76);
     text-align: center;
 }
 
@@ -77,15 +76,15 @@ input {
     margin: 15px;
     width: 90%;
 }
-    
+
 #doneBtn {
     display: none;
 }
-    
+
 #slider {
     display: none;
 }
-    
+
 .instructions {
     pointer-events: auto;
     position: absolute;
@@ -93,7 +92,7 @@ input {
     width: 100%;
     height: 100%;
     text-align: center;
-    vertical-align:middle;
+    vertical-align: middle;
     z-index: 2;
     left: 0;
     bottom: 0;
@@ -107,7 +106,7 @@ input {
     margin-top: 90px;
     height: 70%;
 }
-    
+
 .gotItBtn {
     float: right;
 }
@@ -130,11 +129,113 @@ h2 {
 #redBox1 {
     left: 2px;
     bottom: 5px;
-     display: none;
+    display: none;
 }
 
 #redBox2 {
     bottom: 50px;
     right: 20px;
-     display: none;
+    display: none;
+}
+
+CSS Portal Home CSS Blog CSS Examples CSS Generators CSS Resources CSS Tools Style Input Range This is a handy generator that will help you style the html input range tag. You will be able to style all aspects of the input range tag and see the changes in the preview box below. Once you are happy with the style,
+simply copy and paste the generated css code into your project. If you need a bit of help to style of the input tag,
+just select from one of our preset designs to get you started. Style Input Range Preview Thumb Properties Thumb Thumb Border Track Properties Track Track Border CSS Code input[type=range] {
+    -webkit-appearance: none;
+    margin: 10px 0;
+    width: 100%;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #74A9D8;
+    border-radius: 1px;
+    border: 0px solid #010101;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    box-shadow: 1px 1px 1px #000031;
+    border: 1px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    background: #FFFFFF;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -8px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #74A9D8;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    box-shadow: 1px 1px 1px #000000;
+    background: #74A9D8;
+    border-radius: 1px;
+    border: 0px solid #010101;
+}
+
+input[type=range]::-moz-range-thumb {
+    box-shadow: 1px 1px 1px #000031;
+    border: 1px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 11px;
+    cursor: pointer;
+    animate: 0.2s;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+}
+
+input[type=range]::-ms-fill-lower {
+    background: #74A9D8;
+    border: 0px solid #010101;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px #000000;
+}
+
+input[type=range]::-ms-fill-upper {
+    background: #74A9D8;
+    border: 0px solid #010101;
+    border-radius: 2px;
+    box-shadow: 1px 1px 1px #000000;
+}
+
+input[type=range]::-ms-thumb {
+    box-shadow: 1px 1px 1px #000031;
+    border: 1px solid #00001E;
+    height: 26px;
+    width: 26px;
+    border-radius: 15px;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+    background: #74A9D8;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+    background: #74A9D8;
 }
