@@ -88,7 +88,7 @@ var timeportalCube = new THREE.Object3D();
 loadTramScene();
 tramScene.rotation.y = Math.PI;
 tramScene.translateX(-1);
-var tramSceneGeoPos = Cartesian3.fromDegrees(18.062136, 59.328058, 22.89); //(17.920747, 59.374212, 11.97); 59.328261, 18.063627
+var tramSceneGeoPos = Cartesian3.fromDegrees(18.062261, 59.32814, 22.89); //(17.920747, 59.374212, 11.97); 59.328261, 18.063627
 var tramSceneGeoEntity = new Argon.Cesium.Entity({
     position: new Cesium.ConstantPositionProperty(tramSceneGeoPos, ReferenceFrame.FIXED),
     orientation: Cesium.Quaternion.IDENTITY
